@@ -1,0 +1,5 @@
+# auto detect text files and perform lf normalization
+* text=auto eol=lf
+
+# exclude from github language statistics
+.husky/* linguist-vendored
