@@ -14,10 +14,16 @@
         "url": "https://github.com/Yokozuna59/mermaid-lint/issues"
     },
     "type": "module",
-    "files": [],
-    "scripts": {},
-    "dependencies": {},
-    "devDependencies": {},
+    "scripts": {
+        "prepare": "husky install"
+    },
+    "devDependencies": {
+        "@commitlint/config-angular": "^17.6.3",
+        "@commitlint/format": "^17.4.4",
+        "commitlint": "^17.6.3",
+        "conventional-changelog-angular": "^5.0.13",
+        "husky": "^8.0.3"
+    },
     "keywords": [
         "mermaid",
         "lint",

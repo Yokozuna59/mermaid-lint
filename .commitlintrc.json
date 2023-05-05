@@ -1,0 +1,34 @@
+{
+    "extends": [
+        "@commitlint/config-angular"
+    ],
+    "formatter": "@commitlint/format",
+    "parserPreset": "conventional-changelog-angular",
+    "rules": {
+        "type-enum": [
+            2,
+            "always",
+            [
+                "build",
+                "chore",
+                "ci",
+                "docs",
+                "feat",
+                "fix",
+                "perf",
+                "refactor",
+                "revert",
+                "style",
+                "test"
+            ]
+        ],
+        "signed-off-by": [
+            2,
+            "always"
+        ],
+        "subject-exclamation-mark": [
+            0,
+            "always"
+        ]
+    }
+}
