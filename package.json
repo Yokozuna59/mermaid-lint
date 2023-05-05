@@ -1,0 +1,29 @@
+{
+    "private": true,
+    "name": "mermaid-lint",
+    "version": "0.0.0",
+    "description": "A lintting and formatting tool for mermaid.",
+    "license": "GPL-3.0-or-later",
+    "author": "Yokozuna59",
+    "homepage": "https://github.com/Yokozuna59/mermaid-lint#readme",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Yokozuna59/mermaid-lint.git"
+    },
+    "bugs": {
+        "url": "https://github.com/Yokozuna59/mermaid-lint/issues"
+    },
+    "type": "module",
+    "files": [],
+    "scripts": {},
+    "dependencies": {},
+    "devDependencies": {},
+    "keywords": [
+        "mermaid",
+        "lint",
+        "linter",
+        "format",
+        "formatter"
+    ],
+    "packageManager": ">=pnpm@8.4.0"
+}
