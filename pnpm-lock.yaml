@@ -4,15 +4,15 @@ importers:
 
   .:
     devDependencies:
+      '@commitlint/cli':
+        specifier: ^17.6.3
+        version: 17.6.3
       '@commitlint/config-angular':
         specifier: ^17.6.3
         version: 17.6.3
       '@commitlint/format':
         specifier: ^17.4.4
         version: 17.4.4
-      commitlint:
-        specifier: ^17.6.3
-        version: 17.6.3
       conventional-changelog-angular:
         specifier: ^5.0.13
         version: 5.0.13
@@ -399,18 +399,6 @@ packages:
 
   /color-name@1.1.4:
     resolution: {integrity: sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==}
-    dev: true
-
-  /commitlint@17.6.3:
-    resolution: {integrity: sha512-0S6j3gKZyLmY4F/YchW7lqXiBeplFBKJqXcrOdxhzJdsZdqiPZxqsN7zq++Ovc4iMLnX65W4bJB7YKalYfXesw==}
-    engines: {node: '>=v14'}
-    hasBin: true
-    dependencies:
-      '@commitlint/cli': 17.6.3
-      '@commitlint/types': 17.4.4
-    transitivePeerDependencies:
-      - '@swc/core'
-      - '@swc/wasm'
     dev: true
 
   /compare-func@2.0.0:
