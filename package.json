@@ -22,7 +22,8 @@
         "@commitlint/config-angular": "^17.6.3",
         "@commitlint/format": "^17.4.4",
         "conventional-changelog-angular": "^5.0.13",
-        "husky": "^8.0.3"
+        "husky": "^8.0.3",
+        "markdownlint-cli": "^0.34.0"
     },
     "keywords": [
         "mermaid",
