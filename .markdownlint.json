@@ -1,0 +1,36 @@
+{
+    "default": true,
+    "heading-style": {
+        "style": "atx"
+    },
+    "ul-indent": {
+        "indent": 4
+    },
+    "line-length": {
+        "tables": false
+    },
+    "commands-show-output": false,
+    "no-duplicate-heading": {
+        "siblings_only": true
+    },
+    "ol-prefix": {
+        "style": "ordered"
+    },
+    "no-inline-html": false,
+    "hr-style": {
+        "style": "---"
+    },
+    "first-line-heading": false,
+    "code-block-style": {
+        "style": "fenced"
+    },
+    "code-fence-style": {
+        "style": "backtick"
+    },
+    "emphasis-style": {
+        "style": "underscore"
+    },
+    "strong-style": {
+        "style": "asterisk"
+    }
+}
