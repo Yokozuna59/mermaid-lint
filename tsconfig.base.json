@@ -3,10 +3,8 @@
         "allowArbitraryExtensions": false,
         "declaration": true,
         "esModuleInterop": true,
-        "lib": [
-            "DOM"
-        ],
         "module": "ES6",
+        "moduleResolution": "node",
         "noImplicitOverride": true,
         "noUncheckedIndexedAccess": true,
         "noStrictGenericChecks": false,
