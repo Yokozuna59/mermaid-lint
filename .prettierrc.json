@@ -1,5 +1,18 @@
 {
     "singleQuote": true,
     "tabWidth": 4,
-    "trailingComma": "all"
+    "trailingComma": "all",
+    "plugins": [
+        "prettier-plugin-multiline-arrays"
+    ],
+    "overrides": [
+        {
+            "files": [
+                "*.json"
+            ],
+            "options": {
+                "multilineArraysWrapThreshold": 0
+            }
+        }
+    ]
 }
