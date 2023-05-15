@@ -1,0 +1,13 @@
+{
+    "projectName": "Mermaid",
+    "languages": [
+        {
+            "id": "mermaid",
+            "grammar": "src/language-server/mermaid.langium",
+            "fileExtensions": [
+                ".mmd"
+            ]
+        }
+    ],
+    "out": "src/language-server/generated"
+}
