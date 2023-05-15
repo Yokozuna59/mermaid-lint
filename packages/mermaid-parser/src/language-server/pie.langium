@@ -3,12 +3,10 @@ import './common';
 
 entry PieChart:
     'pie' (showData?='showData')? NEWLINE*
-    ('title' title=Label)? NEWLINE+
+    ('title' title=STRING)? NEWLINE+
     sections+=Section*
 ;
 
 Section:
-    label=Label ':' value=NUMBER NEWLINE+
+    label=STRING ':' value=NUMBER NEWLINE+
 ;
-
-terminal Label: STRING;
