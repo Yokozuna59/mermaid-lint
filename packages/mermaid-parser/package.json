@@ -1,0 +1,34 @@
+{
+    "name": "mermaid-parser",
+    "version": "0.0.0",
+    "description": "",
+    "license": "GPL-3.0-or-later",
+    "author": "Yokozuna59",
+    "homepage": "https://github.com/Yokozuna59/mermaid-lint#readme",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Yokozuna59/mermaid-lint.git"
+    },
+    "bugs": {
+        "url": "https://github.com/Yokozuna59/mermaid-lint/issues"
+    },
+    "main": "dist/src/index.js",
+    "types": "dist/types/index.d.ts",
+    "files": [
+        "dist/"
+    ],
+    "scripts": {
+        "clean": "rimraf dist",
+        "langium:generate": "langium generate"
+    },
+    "keywords": [
+        "mermaid",
+        "parser"
+    ],
+    "dependencies": {
+        "langium": "^1.2.0"
+    },
+    "devDependencies": {
+        "langium-cli": "^1.2.0"
+    }
+}
