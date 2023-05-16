@@ -1,12 +1,13 @@
 grammar PieChart
-import './common';
+import "./common";
 
 entry PieChart:
-    'pie' (showData?='showData')? NEWLINE*
-    ('title' title=STRING)? NEWLINE+
-    sections+=Section*
+    "pie" (showData?="showData")? NEWLINE*
+    ("title" title=STRING)?
+    (NEWLINE+ sections+=Section (NEWLINE+ sections+=Section)*)?
+    NEWLINE*
 ;
 
 Section:
-    label=STRING ':' value=NUMBER NEWLINE+
+    label=STRING ":" value=NUMBER
 ;
