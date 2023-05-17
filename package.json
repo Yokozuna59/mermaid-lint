@@ -15,6 +15,9 @@
     },
     "type": "module",
     "scripts": {
+        "clean": "pnpm run --recursive clean",
+        "format": "prettier --parser=typescript --write \"**/*.ts\"",
+        "lint": "eslint --ext ts --fix .",
         "prepare": "husky install",
         "test": "vitest"
     },
