@@ -1,0 +1,7 @@
+# git-blame ignored revisions
+# to configure, run:
+# 	git config blame.ignoreRevsFile .git-blame-ignore-revs
+# requires git > 2.23.0
+# see <https://git-scm.com/docs/git-blame#Documentation/git-blame.txt---ignore-revs-fileltfilegt>
+
+b8a245ecbe6dff80aeb516f68d9f6815706910bd
