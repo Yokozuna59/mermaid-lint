@@ -3,11 +3,11 @@
     "languages": [
         {
             "id": "mermaid",
-            "grammar": "src/language-server/mermaid.langium",
+            "grammar": "src/language/mermaid.langium",
             "fileExtensions": [
                 ".mmd"
             ]
         }
     ],
-    "out": "src/language-server/generated"
+    "out": "src/language/generated"
 }
