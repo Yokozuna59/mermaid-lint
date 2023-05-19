@@ -1,5 +1,5 @@
 grammar Mermaid
-import './pie'
+import './grammars/pie'
 
 entry Mermaid:
     (
