@@ -25,10 +25,16 @@ describe('valid pie chart codes', async () => {
         // without whitespaces
         `pie`,
 
+        // with spaces
+        `  pie  `,
+
+        // with tabs
+        `\tpie\t`,
+
         // with extra whitespaces
         `
 
-        pie
+        \tpie
 
         `,
     ])('should handle valid pie definitions', async (str: string) => {
@@ -48,10 +54,16 @@ describe('valid pie chart codes', async () => {
         // without whitespaces
         `pie showData`,
 
+        // with spaces
+        `  pie  showData  `,
+
+        // with tabs
+        `\tpie\tshowData\t`,
+
         // with extra whitespaces
         `
 
-        pie showData
+        pie\tshowData
 
         `,
     ])(
