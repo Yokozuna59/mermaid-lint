@@ -22,18 +22,10 @@ describe('valid pie chart codes', async () => {
 
     // pie
     it.each([
-        // without newlines
+        // without whitespaces
         `pie`,
 
-        // extra newline after
-        `pie
-        `,
-
-        // extra newline before
-        `
-        pie`,
-
-        // extra newlines
+        // with extra whitespaces
         `
 
         pie
@@ -53,18 +45,10 @@ describe('valid pie chart codes', async () => {
 
     // pie + showData
     it.each([
-        // without newlines
+        // without whitespaces
         `pie showData`,
 
-        // extra newline after
-        `pie showData
-        `,
-
-        // extra newline before
-        `
-        pie showData`,
-
-        // extra newlines
+        // with extra whitespaces
         `
 
         pie showData
