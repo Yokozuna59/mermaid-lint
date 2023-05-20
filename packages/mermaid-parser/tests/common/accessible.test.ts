@@ -74,7 +74,7 @@ describe('when parsing accTitle', () => {
         const value = result.value;
         expect(value.title).toBeUndefined();
         expect(value.accDescr).toBeUndefined();
-        expect(value.accTitle).toEqual('sample accessibility');
+        expect(value.accTitle).toBe('sample accessibility');
     });
 
     // it('should handle valid accTitle with title', async () => {
@@ -86,7 +86,7 @@ describe('when parsing accTitle', () => {
     //     const value = result.value;
     //     expect(value.title).toBeUndefined();
     //     expect(value.accDescr).toBeUndefined();
-    //     expect(value.accTitle).toEqual('sample accessibility + title test');
+    //     expect(value.accTitle).toBe('sample accessibility + title test');
     // });
 
     // it('should handle valid accTitle with accDescr', async () => {
@@ -98,7 +98,7 @@ describe('when parsing accTitle', () => {
     //     const value = result.value;
     //     expect(value.title).toBeUndefined();
     //     expect(value.accDescr).toBeUndefined();
-    //     expect(value.accTitle).toEqual('sample description + accDescr: test');
+    //     expect(value.accTitle).toBe('sample description + accDescr: test');
     // });
 });
 
@@ -168,7 +168,7 @@ describe('when parsing accDescr', () => {
 
         const value = result.value;
         expect(value.title).toBeUndefined();
-        expect(value.accDescr).toEqual('sample single line description');
+        expect(value.accDescr).toBe('sample single line description');
         expect(value.accTitle).toBeUndefined();
     });
 
@@ -180,7 +180,7 @@ describe('when parsing accDescr', () => {
 
     //     const value = result.value;
     //     expect(value.title).toBeUndefined();
-    //     expect(value.accDescr).toEqual('sample description + title test');
+    //     expect(value.accDescr).toBe('sample description + title test');
     //     expect(value.accTitle).toBeUndefined();
     // });
 
@@ -192,7 +192,7 @@ describe('when parsing accDescr', () => {
 
         const value = result.value;
         expect(value.title).toBeUndefined();
-        expect(value.accDescr).toEqual('sample description + accTitle: test');
+        expect(value.accDescr).toBe('sample description + accTitle: test');
         expect(value.accTitle).toBeUndefined();
     });
 
@@ -263,9 +263,7 @@ describe('when parsing accDescr', () => {
 
         const value = result.value;
         expect(value.title).toBeUndefined();
-        expect(value.accDescr).toEqual(
-            'sample multi line description\nnewline',
-        );
+        expect(value.accDescr).toBe('sample multi line description\nnewline');
         expect(value.accTitle).toBeUndefined();
     });
 
@@ -280,7 +278,7 @@ describe('when parsing accDescr', () => {
 
     //     const value = result.value;
     //     expect(value.title).toBeUndefined();
-    //     expect(value.accDescr).toEqual('sample description +\ntitle test');
+    //     expect(value.accDescr).toBe('sample description +\ntitle test');
     //     expect(value.accTitle).toBeUndefined();
     // });
 
@@ -295,7 +293,7 @@ describe('when parsing accDescr', () => {
 
         const value = result.value;
         expect(value.title).toBeUndefined();
-        expect(value.accDescr).toEqual('sample description +\naccTitle: test');
+        expect(value.accDescr).toBe('sample description +\naccTitle: test');
         expect(value.accTitle).toBeUndefined();
     });
 });
