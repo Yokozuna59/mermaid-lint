@@ -189,36 +189,36 @@ describe('when parsing accDescr', async () => {
     });
 
     // multi line
-    // it.each([
-    //     // without whitespaces
-    //     `pie accDescr{}`,
+    it.each([
+        // without whitespaces
+        `pie accDescr{}`,
 
-    //     // with spaces
-    //     `pie   accDescr  {    }   `,
+        // with spaces
+        `pie   accDescr  {    }   `,
 
-    //     // with tabs
-    //     `pie\taccDescr\t{\t}\t`,
+        // with tabs
+        `pie\taccDescr\t{\t}\t`,
 
-    //     // with extra whitespaces
-    //     `pie
+        // with extra whitespaces
+        `pie
 
-    //     accDescr
+        accDescr
 
-    //     {
+        {
 
-    //     }
+        }
 
-    //     `,
-    // ])('should handle empty multi line accDescr', async (str: string) => {
-    //     const result = (await parser(str)).parseResult;
-    //     // expect(result.parserErrors).toHaveLength(0);
-    //     // expect(result.lexerErrors).toHaveLength(0);
+        `,
+    ])('should handle empty multi line accDescr', async (str: string) => {
+        const result = (await parser(str)).parseResult;
+        expect(result.parserErrors).toHaveLength(0);
+        // expect(result.lexerErrors).toHaveLength(0);
 
-    //     const value = result.value;
-    //     expect(value.title).toBeUndefined();
-    //     expect(value.accDescr).toBeUndefined();
-    //     expect(value.accTitle).toBeUndefined();
-    // });
+        const value = result.value;
+        expect(value.title).toBeUndefined();
+        expect(value.accDescr).toBeUndefined();
+        expect(value.accTitle).toBeUndefined();
+    });
 
     it.each([
         // without whitespaces

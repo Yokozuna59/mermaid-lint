@@ -44,7 +44,8 @@ const matchAccDescr: CustomPatternMatcherFunc = (str: string) => {
 
         // multi line description
         if (match[2] !== undefined) {
-            return [match[2].replace(/^(\n+|[ \t]+)|\s+$/gm, '')];
+            const result = match[2].replace(/^\s*|\s+$/gm, '');
+            return result ? [result] : null;
         }
     }
     return null;
