@@ -1,6 +1,6 @@
-import { createServicesForGrammar } from 'langium';
+import { createServicesForGrammar, LangiumDocument } from 'langium';
 import { parseHelper } from 'langium/lib/test';
-import { describe, expect, it } from 'vitest';
+import { beforeAll, describe, expect, it } from 'vitest';
 
 import {
     Mermaid,
@@ -8,16 +8,20 @@ import {
     MermiadTokenBuilder,
 } from '../../src/language';
 
-describe('when parsing accTitle', async () => {
-    const services = await createServicesForGrammar({
-        grammar: MermaidGrammar(),
-        module: {
-            parser: {
-                TokenBuilder: () => new MermiadTokenBuilder(),
+describe('when parsing accTitle', () => {
+    let parser: (input: string) => Promise<LangiumDocument<Mermaid>>;
+
+    beforeAll(async () => {
+        const services = await createServicesForGrammar({
+            grammar: MermaidGrammar(),
+            module: {
+                parser: {
+                    TokenBuilder: () => new MermiadTokenBuilder(),
+                },
             },
-        },
+        });
+        parser = parseHelper<Mermaid>(services);
     });
-    const parser = parseHelper<Mermaid>(services);
 
     it.each([
         // without whitespaces
@@ -98,16 +102,20 @@ describe('when parsing accTitle', async () => {
     // });
 });
 
-describe('when parsing accDescr', async () => {
-    const services = await createServicesForGrammar({
-        grammar: MermaidGrammar(),
-        module: {
-            parser: {
-                TokenBuilder: () => new MermiadTokenBuilder(),
+describe('when parsing accDescr', () => {
+    let parser: (input: string) => Promise<LangiumDocument<Mermaid>>;
+
+    beforeAll(async () => {
+        const services = await createServicesForGrammar({
+            grammar: MermaidGrammar(),
+            module: {
+                parser: {
+                    TokenBuilder: () => new MermiadTokenBuilder(),
+                },
             },
-        },
+        });
+        parser = parseHelper<Mermaid>(services);
     });
-    const parser = parseHelper<Mermaid>(services);
 
     // single line
     it.each([
