@@ -1,6 +1,6 @@
-import { createServicesForGrammar } from 'langium';
+import { createServicesForGrammar, LangiumDocument } from 'langium';
 import { parseHelper } from 'langium/lib/test';
-import { describe, expect, it } from 'vitest';
+import { beforeAll, describe, expect, it } from 'vitest';
 
 import {
     Mermaid,
@@ -9,16 +9,20 @@ import {
     PieChart,
 } from '../../src/language';
 
-describe('valid pie chart codes', async () => {
-    const services = await createServicesForGrammar({
-        grammar: MermaidGrammar(),
-        module: {
-            parser: {
-                TokenBuilder: () => new MermiadTokenBuilder(),
+describe('valid pie chart codes', () => {
+    let parser: (input: string) => Promise<LangiumDocument<Mermaid>>;
+
+    beforeAll(async () => {
+        const services = await createServicesForGrammar({
+            grammar: MermaidGrammar(),
+            module: {
+                parser: {
+                    TokenBuilder: () => new MermiadTokenBuilder(),
+                },
             },
-        },
+        });
+        parser = parseHelper<Mermaid>(services);
     });
-    const parser = parseHelper<Mermaid>(services);
 
     // pie
     it.each([
