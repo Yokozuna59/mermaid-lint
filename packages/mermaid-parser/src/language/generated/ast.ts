@@ -16,6 +16,8 @@ export function isMermaid(item: unknown): item is Mermaid {
 
 export interface PieChart extends AstNode {
     readonly $type: 'PieChart';
+    accDescr?: string
+    accTitle?: string
     sections: Array<Section>
     showData: boolean
     title?: string

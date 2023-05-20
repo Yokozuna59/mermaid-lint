@@ -4,10 +4,10 @@ import "./common";
 entry PieChart:
     NEWLINE*
     "pie" (showData?="showData")? NEWLINE*
-    ("title" title=STRING NEWLINE*)?
-    (sections+=Section (NEWLINE+ sections+=Section)* NEWLINE*)?
+    DESCR_AND_TITLES?
+    sections+=Section*
 ;
 
 Section:
-    label=STRING ":" value=NUMBER
+    label=STRING ":" value=NUMBER (EOF | NEWLINE+)
 ;
