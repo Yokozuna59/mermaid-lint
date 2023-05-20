@@ -77,6 +77,19 @@ describe('when parsing accTitle', () => {
         expect(value.accTitle).toBe('sample accessibility');
     });
 
+    // it('should handle duplicate accTitle', async () => {
+    //     const str = `pie accTitle: sample accessibility
+    //                 accTitle:`;
+    //     const result = (await parser(str)).parseResult;
+    //     // expect(result.parserErrors).toHaveLength(0);
+    //     // expect(result.lexerErrors).toHaveLength(0);
+
+    //     const value = result.value;
+    //     expect(value.title).toBeUndefined();
+    //     expect(value.accDescr).toBeUndefined();
+    //     expect(value.accTitle).toBeUndefined();
+    // });
+
     // it('should handle valid accTitle with title', async () => {
     //     const str = `pie accTitle: sample accessibility + title test`;
     //     const result = (await parser(str)).parseResult;
@@ -171,6 +184,19 @@ describe('when parsing accDescr', () => {
         expect(value.accDescr).toBe('sample single line description');
         expect(value.accTitle).toBeUndefined();
     });
+
+    // it('should handle duplicate single line accDescr', async () => {
+    //     const str = `pie accDescr: sample accessibility
+    //     accDescr:`;
+    //     const result = (await parser(str)).parseResult;
+    //     expect(result.parserErrors).toHaveLength(0);
+    //     expect(result.lexerErrors).toHaveLength(0);
+
+    //     const value = result.value;
+    //     expect(value.title).toBeUndefined();
+    //     expect(value.accDescr).toBeUndefined();
+    //     expect(value.accTitle).toBeUndefined();
+    // });
 
     // it('should handle valid single line accDescr with title', async () => {
     //     const str = `pie accDescr: sample description + title test`;
@@ -267,6 +293,23 @@ describe('when parsing accDescr', () => {
         expect(value.accTitle).toBeUndefined();
     });
 
+    // it('should handle duplicate multi line accDescr', async () => {
+    //     const str = `pie accDescr {
+    //         sample accessibility
+    //     }
+    //     accDescr {
+
+    //     }`;
+    //     const result = (await parser(str)).parseResult;
+    //     // expect(result.parserErrors).toHaveLength(0);
+    //     // expect(result.lexerErrors).toHaveLength(0);
+
+    //     const value = result.value;
+    //     expect(value.title).toBeUndefined();
+    //     expect(value.accDescr).toBeUndefined();
+    //     expect(value.accTitle).toBeUndefined();
+    // });
+
     // it('should handle valid multi line accDescr with title', async () => {
     //     const str = `pie accDescr {
     //         sample description +
@@ -296,4 +339,27 @@ describe('when parsing accDescr', () => {
         expect(value.accDescr).toBe('sample description +\naccTitle: test');
         expect(value.accTitle).toBeUndefined();
     });
+
+    // both
+    // it.each([
+    //     `pie accDescr {
+    //         sample accessibility
+    //     }
+    //     accDescr:`,
+
+    //     `pie accDescr: sample accessibility
+    //     accDescr {}`,
+    // ])(
+    //     'should handle duplicate single and multi line accDescr',
+    //     async (str: string) => {
+    //         const result = (await parser(str)).parseResult;
+    //         // expect(result.parserErrors).toHaveLength(0);
+    //         // expect(result.lexerErrors).toHaveLength(0);
+
+    //         const value = result.value;
+    //         expect(value.title).toBeUndefined();
+    //         expect(value.accDescr).toBeUndefined();
+    //         expect(value.accTitle).toBeUndefined();
+    //     },
+    // );
 });
