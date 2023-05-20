@@ -30,6 +30,7 @@
         "conventional-changelog-angular": "^5.0.13",
         "eslint": "^8.39.0",
         "eslint-config-prettier": "^8.8.0",
+        "eslint-plugin-tsdoc": "^0.2.17",
         "husky": "^8.0.3",
         "lint-staged": "^13.2.2",
         "markdownlint-cli": "^0.34.0",
