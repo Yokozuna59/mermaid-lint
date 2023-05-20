@@ -6,7 +6,8 @@
         "sourceType": "module"
     },
     "plugins": [
-        "@typescript-eslint"
+        "@typescript-eslint",
+        "eslint-plugin-tsdoc"
     ],
     "extends": [
         "eslint:recommended",
@@ -14,5 +15,8 @@
         "plugin:@typescript-eslint/eslint-recommended",
         "plugin:@typescript-eslint/recommended-requiring-type-checking",
         "prettier"
-    ]
+    ],
+    "rules": {
+        "tsdoc/syntax": "warn"
+    }
 }
