@@ -1,4 +1,9 @@
-import { CustomPatternMatcherFunc, EOF, TokenType } from 'chevrotain';
+import {
+    CustomPatternMatcherFunc,
+    CustomPatternMatcherReturn,
+    EOF,
+    TokenType,
+} from 'chevrotain';
 import { DefaultTokenBuilder } from 'langium';
 import { TerminalRule } from 'langium/lib/grammar/generated/ast';
 
@@ -19,14 +24,18 @@ const matchTitle: CustomPatternMatcherFunc = (str: string) => {
  */
 const accTitleRegex = /(?:^|[ \t]+)accTitle[ \t]*:[ \t]*([^\n]*)?/;
 const matchAccTitle: CustomPatternMatcherFunc = (str: string) => {
-    const match = accTitleRegex.exec(str);
-    if (match) {
-        // single line title
+    let result = null;
+    let match = accTitleRegex.exec(str);
+    while (match !== null) {
         if (match[1] !== undefined) {
-            return [match[1].trim()];
+            result = [match[1].trim()];
+        } else {
+            result = null;
         }
+        str = str.replace(match[0], '');
+        match = accTitleRegex.exec(str);
     }
-    return null;
+    return result as CustomPatternMatcherReturn;
 };
 
 /**
