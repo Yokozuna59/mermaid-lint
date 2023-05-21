@@ -9,7 +9,7 @@ import {
     PieChart,
 } from '../../src/language';
 
-describe('valid pie chart codes', () => {
+describe('when parsing pie chart', () => {
     let parser: (input: string) => Promise<LangiumDocument<Mermaid>>;
 
     beforeAll(async () => {
