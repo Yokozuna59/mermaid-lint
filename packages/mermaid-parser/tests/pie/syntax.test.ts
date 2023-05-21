@@ -41,7 +41,7 @@ describe('when parsing pie chart', () => {
         \tpie
 
         `,
-    ])('should handle valid pie definitions', async (str: string) => {
+    ])('should handle valid pie', async (str: string) => {
         const result = (await parser(str)).parseResult;
         expect(result.parserErrors).toHaveLength(0);
         expect(result.lexerErrors).toHaveLength(0);
@@ -70,18 +70,15 @@ describe('when parsing pie chart', () => {
         pie\tshowData
 
         `,
-    ])(
-        'should handle valid pie + showData definitions',
-        async (str: string) => {
-            const result = (await parser(str)).parseResult;
-            expect(result.parserErrors).toHaveLength(0);
-            expect(result.lexerErrors).toHaveLength(0);
+    ])('should handle valid pie + showData', async (str: string) => {
+        const result = (await parser(str)).parseResult;
+        expect(result.parserErrors).toHaveLength(0);
+        expect(result.lexerErrors).toHaveLength(0);
 
-            const value = result.value;
-            expect(value.$type).toBe(PieChart);
-            expect(value.showData).toBeTruthy();
-            expect(value.title).toBeUndefined();
-            expect(value.sections).toHaveLength(0);
-        },
-    );
+        const value = result.value;
+        expect(value.$type).toBe(PieChart);
+        expect(value.showData).toBeTruthy();
+        expect(value.title).toBeUndefined();
+        expect(value.sections).toHaveLength(0);
+    });
 });
