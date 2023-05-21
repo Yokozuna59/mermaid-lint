@@ -16,6 +16,7 @@
     "type": "module",
     "scripts": {
         "clean": "pnpm run --recursive clean",
+        "coverage": "vitest run --coverage",
         "format": "prettier --parser=typescript --write \"**/*.ts\"",
         "lint": "eslint --ext ts --fix .",
         "prepare": "husky install",
@@ -27,6 +28,7 @@
         "@commitlint/format": "^17.4.4",
         "@typescript-eslint/eslint-plugin": "^5.59.2",
         "@typescript-eslint/parser": "^5.59.2",
+        "@vitest/coverage-istanbul": "^0.31.1",
         "conventional-changelog-angular": "^5.0.13",
         "eslint": "^8.39.0",
         "eslint-config-prettier": "^8.8.0",
