@@ -90,7 +90,7 @@ describe('when parsing accTitle', () => {
         expect(value.accTitle).toBeUndefined();
     });
 
-    it.todo('should handle accTitle inside accTitle', async () => {
+    it('should handle accTitle inside accTitle', async () => {
         const str = `pie accTitle: accTitle: test`;
         const result = (await parser(str)).parseResult;
         // expect(result.parserErrors).toHaveLength(0);
@@ -98,8 +98,8 @@ describe('when parsing accTitle', () => {
 
         const value = result.value;
         expect(value.title).toBeUndefined();
-        expect(value.accDescr).toBe('accTitle: test');
-        expect(value.accTitle).toBeUndefined();
+        expect(value.accDescr).toBeUndefined();
+        expect(value.accTitle).toBe('accTitle: test');
     });
 
     it.todo('should handle valid accTitle with title', async () => {
