@@ -90,6 +90,18 @@ describe('when parsing accTitle', () => {
         expect(value.accTitle).toBeUndefined();
     });
 
+    it.todo('should handle accTitle inside accTitle', async () => {
+        const str = `pie accTitle: accTitle: test`;
+        const result = (await parser(str)).parseResult;
+        // expect(result.parserErrors).toHaveLength(0);
+        // expect(result.lexerErrors).toHaveLength(0);
+
+        const value = result.value;
+        expect(value.title).toBeUndefined();
+        expect(value.accDescr).toBe('accTitle: test');
+        expect(value.accTitle).toBeUndefined();
+    });
+
     it.todo('should handle valid accTitle with title', async () => {
         const str = `pie accTitle: sample accessibility + title test`;
         const result = (await parser(str)).parseResult;
@@ -195,6 +207,18 @@ describe('when parsing accDescr', () => {
         const value = result.value;
         expect(value.title).toBeUndefined();
         expect(value.accDescr).toBeUndefined();
+        expect(value.accTitle).toBeUndefined();
+    });
+
+    it('should handle single line accDescr inside single line accDescr', async () => {
+        const str = `pie accDescr: accDescr: test`;
+        const result = (await parser(str)).parseResult;
+        // expect(result.parserErrors).toHaveLength(0);
+        // expect(result.lexerErrors).toHaveLength(0);
+
+        const value = result.value;
+        expect(value.title).toBeUndefined();
+        expect(value.accDescr).toBe('accDescr: test');
         expect(value.accTitle).toBeUndefined();
     });
 
@@ -310,6 +334,26 @@ describe('when parsing accDescr', () => {
         expect(value.accTitle).toBeUndefined();
     });
 
+    it.todo(
+        'should handle multi line accDescr inside multi line accDescr',
+        async () => {
+            const str = `pie accDescr {
+            accDescr {
+                test
+            }
+        }
+        `;
+            const result = (await parser(str)).parseResult;
+            // expect(result.parserErrors).toHaveLength(0);
+            // expect(result.lexerErrors).toHaveLength(0);
+
+            const value = result.value;
+            expect(value.title).toBeUndefined();
+            expect(value.accDescr).toBe('accDescr {\ntest\n}');
+            expect(value.accTitle).toBeUndefined();
+        },
+    );
+
     it.todo('should handle valid multi line accDescr with title', async () => {
         const str = `pie accDescr {
             sample description +
@@ -362,4 +406,30 @@ describe('when parsing accDescr', () => {
             expect(value.accTitle).toBeUndefined();
         },
     );
+
+    it('should handle multi line accDescr inside single line accDescr', async () => {
+        const str = `pie accDescr: accDescr {test}`;
+        const result = (await parser(str)).parseResult;
+        // expect(result.parserErrors).toHaveLength(0);
+        // expect(result.lexerErrors).toHaveLength(0);
+
+        const value = result.value;
+        expect(value.title).toBeUndefined();
+        expect(value.accDescr).toBe('accDescr {test}');
+        expect(value.accTitle).toBeUndefined();
+    });
+
+    it('should handle single line accDescr inside multi line accDescr', async () => {
+        const str = `pie accDescr {
+                accDescr: test
+            }`;
+        const result = (await parser(str)).parseResult;
+        // expect(result.parserErrors).toHaveLength(0);
+        // expect(result.lexerErrors).toHaveLength(0);
+
+        const value = result.value;
+        expect(value.title).toBeUndefined();
+        expect(value.accDescr).toBe('accDescr: test');
+        expect(value.accTitle).toBeUndefined();
+    });
 });
