@@ -1,5 +1,12 @@
 {
-    "*.md": ["markdownlint --fix"],
-    "*.json": ["prettier --write"],
-    "*.ts": ["prettier --write", "eslint --fix"]
+    "*.md": [
+        "markdownlint --fix"
+    ],
+    "*.json": [
+        "prettier --write"
+    ],
+    "*.ts": [
+        "prettier --write",
+        "eslint --fix"
+    ]
 }

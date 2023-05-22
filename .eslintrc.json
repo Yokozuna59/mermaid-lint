@@ -2,21 +2,85 @@
     "root": true,
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
-        "project": "./tsconfig.base.json",
+        "project": "tsconfig.base.json",
         "sourceType": "module"
     },
     "plugins": [
         "@typescript-eslint",
-        "eslint-plugin-tsdoc"
+        "check-file",
+        "deprecation",
+        "eslint-comments",
+        "import",
+        "jsdoc",
+        "n",
+        "promise",
+        "regexp",
+        "security",
+        "unicorn",
+        "eslint-plugin-tsdoc",
+        "vitest"
     ],
     "extends": [
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
         "plugin:@typescript-eslint/eslint-recommended",
         "plugin:@typescript-eslint/recommended-requiring-type-checking",
+        "plugin:eslint-comments/recommended",
+        "plugin:jsdoc/recommended-typescript",
+        "plugin:n/recommended",
+        "plugin:promise/recommended",
+        "plugin:regexp/recommended",
+        "plugin:security/recommended",
+        "plugin:unicorn/recommended",
+        "plugin:vitest/all",
+        "plugin:vitest/recommended",
         "prettier"
     ],
     "rules": {
+        "@typescript-eslint/ban-tslint-comment": "error",
+        "@typescript-eslint/consistent-indexed-object-style": [
+            "error",
+            "record"
+        ],
+        "vitest/consistent-test-filename": [
+            "error",
+            {
+                "pattern": "[^ ]+\\.test\\.ts$"
+            }
+        ],
+        "vitest/consistent-test-it": [
+            "error",
+            {
+                "fn": "it",
+                "withinDescribe": "it"
+            }
+        ],
+        "vitest/max-expects": "off",
+        "vitest/no-hooks": "off",
+        "check-file/filename-naming-convention": [
+            "error",
+            {
+                "**/*\\.ts": "KEBAB_CASE"
+            },
+            {
+                "ignoreMiddleExtensions": true
+            }
+        ],
+        "check-file/folder-naming-convention": [
+            "error",
+            {
+                "packages/**/{src,tests}/*": "KEBAB_CASE"
+            }
+        ],
+        "check-file/folder-match-with-fex": [
+            "error",
+            {
+                "*\\.test\\.ts": "**/tests/*"
+            }
+        ],
+        "n/no-extraneous-import": "off",
+        "n/no-missing-import": "off",
+        "deprecation/deprecation": "warn",
         "tsdoc/syntax": "warn"
     }
 }

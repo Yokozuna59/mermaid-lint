@@ -41,8 +41,8 @@ describe('when parsing pie chart', () => {
         \tpie
 
         `,
-    ])('should handle valid pie', async (str: string) => {
-        const result = (await parser(str)).parseResult;
+    ])('should handle valid pie', async (string_: string) => {
+        const { parseResult: result } = await parser(string_);
         expect(result.parserErrors).toHaveLength(0);
         expect(result.lexerErrors).toHaveLength(0);
 
@@ -70,8 +70,8 @@ describe('when parsing pie chart', () => {
         pie\tshowData
 
         `,
-    ])('should handle valid pie + showData', async (str: string) => {
-        const result = (await parser(str)).parseResult;
+    ])('should handle valid pie + showData', async (string_: string) => {
+        const { parseResult: result } = await parser(string_);
         expect(result.parserErrors).toHaveLength(0);
         expect(result.lexerErrors).toHaveLength(0);
 
@@ -99,17 +99,20 @@ describe('when parsing pie chart', () => {
         \ttitle sample title
 
         `,
-    ])('should handle valid pie + title in same line', async (str: string) => {
-        const result = (await parser(str)).parseResult;
-        // expect(result.parserErrors).toHaveLength(0);
-        // expect(result.lexerErrors).toHaveLength(0);
+    ])(
+        'should handle valid pie + title in same line',
+        async (string_: string) => {
+            const { parseResult: result } = await parser(string_);
+            // expect(result.parserErrors).toHaveLength(0);
+            // expect(result.lexerErrors).toHaveLength(0);
 
-        const value = result.value;
-        expect(value.$type).toBe(PieChart);
-        expect(value.showData).toBeFalsy();
-        expect(value.title).toBe('sample title');
-        expect(value.sections).toHaveLength(0);
-    });
+            const value = result.value;
+            expect(value.$type).toBe(PieChart);
+            expect(value.showData).toBeFalsy();
+            expect(value.title).toBe('sample title');
+            expect(value.sections).toHaveLength(0);
+        },
+    );
 
     // pie + \n + title
     it.each([
@@ -135,8 +138,8 @@ describe('when parsing pie chart', () => {
         `,
     ])(
         'should handle valid pie + title in different line',
-        async (str: string) => {
-            const result = (await parser(str)).parseResult;
+        async (string_: string) => {
+            const { parseResult: result } = await parser(string_);
             // expect(result.parserErrors).toHaveLength(0);
             // expect(result.lexerErrors).toHaveLength(0);
 
@@ -156,17 +159,20 @@ describe('when parsing pie chart', () => {
         // extra newline after
         `pie showData title sample title
         `,
-    ])('should handle valid pie + showData + title', async (str: string) => {
-        const result = (await parser(str)).parseResult;
-        // expect(result.parserErrors).toHaveLength(0);
-        // expect(result.lexerErrors).toHaveLength(0);
+    ])(
+        'should handle valid pie + showData + title',
+        async (string_: string) => {
+            const { parseResult: result } = await parser(string_);
+            // expect(result.parserErrors).toHaveLength(0);
+            // expect(result.lexerErrors).toHaveLength(0);
 
-        const value = result.value;
-        expect(value.$type).toBe(PieChart);
-        expect(value.showData).toBeTruthy();
-        expect(value.title).toBe('sample title');
-        expect(value.sections).toHaveLength(0);
-    });
+            const value = result.value;
+            expect(value.$type).toBe(PieChart);
+            expect(value.showData).toBeTruthy();
+            expect(value.title).toBe('sample title');
+            expect(value.sections).toHaveLength(0);
+        },
+    );
 
     // pie + showData + \n + title
     it.each([
@@ -192,8 +198,8 @@ describe('when parsing pie chart', () => {
         `,
     ])(
         'should handle valid pie + showData + title in different line',
-        async (str: string) => {
-            const result = (await parser(str)).parseResult;
+        async (string_: string) => {
+            const { parseResult: result } = await parser(string_);
             // expect(result.parserErrors).toHaveLength(0);
             // expect(result.lexerErrors).toHaveLength(0);
 
