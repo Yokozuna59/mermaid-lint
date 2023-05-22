@@ -7,7 +7,7 @@ import {
     matchAccessibilityDescr,
     matchAccessibilityTitle,
     matchTitle,
-} from '../matchers';
+} from './matchers';
 
 export class MermiadTokenBuilder extends DefaultTokenBuilder {
     override buildTerminalToken(terminal: TerminalRule): TokenType {
