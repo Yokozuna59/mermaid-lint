@@ -8,7 +8,7 @@ import {
     MermiadTokenBuilder,
 } from '../../src/language';
 
-describe('when parsing accTitle', () => {
+describe('accTitle', () => {
     let parser: (input: string) => Promise<LangiumDocument<Mermaid>>;
 
     beforeAll(async () => {
@@ -23,132 +23,140 @@ describe('when parsing accTitle', () => {
         parser = parseHelper<Mermaid>(services);
     });
 
-    it.each([
-        // without whitespaces
-        `pie accTitle:`,
+    describe('normal', () => {
+        it.each([
+            // without whitespaces
+            `pie accTitle:`,
 
-        // with spaces
-        `pie   accTitle  :   `,
+            // with spaces
+            `pie   accTitle  :   `,
 
-        // with tabs
-        `pie\taccTitle\t:\t`,
+            // with tabs
+            `pie\taccTitle\t:\t`,
 
-        // with extra whitespaces
-        `pie
+            // with extra whitespaces
+            `pie
 
         accTitle\t:
 
         `,
-    ])('should handle empty accTitle', async (str: string) => {
-        const result = (await parser(str)).parseResult;
-        // expect(result.parserErrors).toHaveLength(0);
-        // expect(result.lexerErrors).toHaveLength(0);
+        ])('should handle empty accTitle', async (str: string) => {
+            const result = (await parser(str)).parseResult;
+            // expect(result.parserErrors).toHaveLength(0);
+            // expect(result.lexerErrors).toHaveLength(0);
 
-        const value = result.value;
-        expect(value.title).toBeUndefined();
-        expect(value.accDescr).toBeUndefined();
-        expect(value.accTitle).toBeUndefined();
-    });
+            const value = result.value;
+            expect(value.title).toBeUndefined();
+            expect(value.accDescr).toBeUndefined();
+            expect(value.accTitle).toBeUndefined();
+        });
 
-    it.each([
-        // without whitespaces
-        `pie accTitle: sample accessibility`,
+        it.each([
+            // without whitespaces
+            `pie accTitle: sample accessibility`,
 
-        // with spaces
-        `pie   accTitle  : sample accessibility  `,
+            // with spaces
+            `pie   accTitle  : sample accessibility  `,
 
-        // with tabs
-        `pie\taccTitle\t:\tsample accessibility\t`,
+            // with tabs
+            `pie\taccTitle\t:\tsample accessibility\t`,
 
-        // with extra whitespaces
-        `pie
+            // with extra whitespaces
+            `pie
 
         accTitle\t:   sample accessibility
 
         `,
-    ])('should handle valid accTitle', async (str: string) => {
-        const result = (await parser(str)).parseResult;
-        // expect(result.parserErrors).toHaveLength(0);
-        // expect(result.lexerErrors).toHaveLength(0);
+        ])('should handle regular accTitle', async (str: string) => {
+            const result = (await parser(str)).parseResult;
+            // expect(result.parserErrors).toHaveLength(0);
+            // expect(result.lexerErrors).toHaveLength(0);
 
-        const value = result.value;
-        expect(value.title).toBeUndefined();
-        expect(value.accDescr).toBeUndefined();
-        expect(value.accTitle).toBe('sample accessibility');
+            const value = result.value;
+            expect(value.title).toBeUndefined();
+            expect(value.accDescr).toBeUndefined();
+            expect(value.accTitle).toBe('sample accessibility');
+        });
+
+        it.todo('should handle accTitle with title', async () => {
+            const str = `pie accTitle: sample accessibility + title test`;
+            const result = (await parser(str)).parseResult;
+            // expect(result.parserErrors).toHaveLength(0);
+            // expect(result.lexerErrors).toHaveLength(0);
+
+            const value = result.value;
+            expect(value.title).toBeUndefined();
+            expect(value.accDescr).toBeUndefined();
+            expect(value.accTitle).toBe('sample accessibility + title test');
+        });
+
+        it.todo('should handle accTitle with accDescr', async () => {
+            const str = `pie accTitle: sample description + accDescr: test`;
+            const result = (await parser(str)).parseResult;
+            // expect(result.parserErrors).toHaveLength(0);
+            // expect(result.lexerErrors).toHaveLength(0);
+
+            const value = result.value;
+            expect(value.title).toBeUndefined();
+            expect(value.accDescr).toBeUndefined();
+            expect(value.accTitle).toBe('sample description + accDescr: test');
+        });
     });
 
-    it('should handle duplicate empty accTitle into valid accTitle', async () => {
-        const str = `pie accTitle:
-                    accTitle: sample accessibility`;
-        const result = (await parser(str)).parseResult;
-        // expect(result.parserErrors).toHaveLength(0);
-        // expect(result.lexerErrors).toHaveLength(0);
+    describe('duplicate', () => {
+        describe('inside', () => {
+            it('should handle accTitle inside accTitle', async () => {
+                const str = `pie accTitle: accTitle: test`;
+                const result = (await parser(str)).parseResult;
+                // expect(result.parserErrors).toHaveLength(0);
+                // expect(result.lexerErrors).toHaveLength(0);
 
-        const value = result.value;
-        expect(value.title).toBeUndefined();
-        expect(value.accDescr).toBeUndefined();
-        expect(value.accTitle).toBe('sample accessibility');
-    });
+                const value = result.value;
+                expect(value.title).toBeUndefined();
+                expect(value.accDescr).toBeUndefined();
+                expect(value.accTitle).toBe('accTitle: test');
+            });
+        });
 
-    it('should handle duplicate valid accTitle into empty accTitle', async () => {
-        const str = `pie accTitle: sample accessibility
-                    accTitle:`;
-        const result = (await parser(str)).parseResult;
-        // expect(result.parserErrors).toHaveLength(0);
-        // expect(result.lexerErrors).toHaveLength(0);
+        describe('after', () => {
+            it('should handle regular accTitle after empty accTitle', async () => {
+                const str = `pie accTitle:
+                accTitle: sample accessibility`;
+                const result = (await parser(str)).parseResult;
+                // expect(result.parserErrors).toHaveLength(0);
+                // expect(result.lexerErrors).toHaveLength(0);
 
-        const value = result.value;
-        expect(value.title).toBeUndefined();
-        expect(value.accDescr).toBeUndefined();
-        expect(value.accTitle).toBeUndefined();
-    });
+                const value = result.value;
+                expect(value.title).toBeUndefined();
+                expect(value.accDescr).toBeUndefined();
+                expect(value.accTitle).toBe('sample accessibility');
+            });
 
-    it('should handle duplicate valid accTitle into valid accTitle', async () => {
-        const str = `pie accTitle: test accessibility
-                    accTitle: sample accessibility`;
-        const result = (await parser(str)).parseResult;
-        // expect(result.parserErrors).toHaveLength(0);
-        // expect(result.lexerErrors).toHaveLength(0);
+            it('should handle empty accTitle after regular accTitle', async () => {
+                const str = `pie accTitle: sample accessibility
+                accTitle:`;
+                const result = (await parser(str)).parseResult;
+                // expect(result.parserErrors).toHaveLength(0);
+                // expect(result.lexerErrors).toHaveLength(0);
 
-        const value = result.value;
-        expect(value.title).toBeUndefined();
-        expect(value.accDescr).toBeUndefined();
-        expect(value.accTitle).toBe('sample accessibility');
-    });
+                const value = result.value;
+                expect(value.title).toBeUndefined();
+                expect(value.accDescr).toBeUndefined();
+                expect(value.accTitle).toBeUndefined();
+            });
 
-    it('should handle accTitle inside accTitle', async () => {
-        const str = `pie accTitle: accTitle: test`;
-        const result = (await parser(str)).parseResult;
-        // expect(result.parserErrors).toHaveLength(0);
-        // expect(result.lexerErrors).toHaveLength(0);
+            it('should handle regular accTitle after regular accTitle', async () => {
+                const str = `pie accTitle: test accessibility
+                accTitle: sample accessibility`;
+                const result = (await parser(str)).parseResult;
+                // expect(result.parserErrors).toHaveLength(0);
+                // expect(result.lexerErrors).toHaveLength(0);
 
-        const value = result.value;
-        expect(value.title).toBeUndefined();
-        expect(value.accDescr).toBeUndefined();
-        expect(value.accTitle).toBe('accTitle: test');
-    });
-
-    it.todo('should handle valid accTitle with title', async () => {
-        const str = `pie accTitle: sample accessibility + title test`;
-        const result = (await parser(str)).parseResult;
-        // expect(result.parserErrors).toHaveLength(0);
-        // expect(result.lexerErrors).toHaveLength(0);
-
-        const value = result.value;
-        expect(value.title).toBeUndefined();
-        expect(value.accDescr).toBeUndefined();
-        expect(value.accTitle).toBe('sample accessibility + title test');
-    });
-
-    it.todo('should handle valid accTitle with accDescr', async () => {
-        const str = `pie accTitle: sample description + accDescr: test`;
-        const result = (await parser(str)).parseResult;
-        // expect(result.parserErrors).toHaveLength(0);
-        // expect(result.lexerErrors).toHaveLength(0);
-
-        const value = result.value;
-        expect(value.title).toBeUndefined();
-        expect(value.accDescr).toBeUndefined();
-        expect(value.accTitle).toBe('sample description + accDescr: test');
+                const value = result.value;
+                expect(value.title).toBeUndefined();
+                expect(value.accDescr).toBeUndefined();
+                expect(value.accTitle).toBe('sample accessibility');
+            });
+        });
     });
 });
