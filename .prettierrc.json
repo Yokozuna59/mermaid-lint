@@ -3,8 +3,14 @@
     "tabWidth": 4,
     "trailingComma": "all",
     "plugins": [
-        "prettier-plugin-multiline-arrays"
+        "prettier-plugin-multiline-arrays",
+        "@trivago/prettier-plugin-sort-imports"
     ],
+    "importOrder": [
+        "^[./]"
+    ],
+    "importOrderSeparation": true,
+    "importOrderSortSpecifiers": true,
     "overrides": [
         {
             "files": [
