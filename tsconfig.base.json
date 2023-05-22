@@ -9,6 +9,6 @@
         "noUncheckedIndexedAccess": true,
         "noStrictGenericChecks": false,
         "strict": true,
-        "target": "ES6"
+        "target": "ES2021"
     }
 }

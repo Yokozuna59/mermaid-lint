@@ -40,8 +40,8 @@ describe('accDescr', () => {
             accDescr\t:
 
             `,
-        ])('should handle empty accDescr', async (str: string) => {
-            const result = (await parser(str)).parseResult;
+        ])('should handle empty accDescr', async (string_: string) => {
+            const { parseResult: result } = await parser(string_);
             // expect(result.parserErrors).toHaveLength(0);
             // expect(result.lexerErrors).toHaveLength(0);
 
@@ -67,8 +67,8 @@ describe('accDescr', () => {
             accDescr\t: sample single line description
 
             `,
-        ])('should handle regular accDescr', async (str: string) => {
-            const result = (await parser(str)).parseResult;
+        ])('should handle regular accDescr', async (string_: string) => {
+            const { parseResult: result } = await parser(string_);
             // expect(result.parserErrors).toHaveLength(0);
             // expect(result.lexerErrors).toHaveLength(0);
 
@@ -79,8 +79,8 @@ describe('accDescr', () => {
         });
 
         it.todo('should handle accDescr with title', async () => {
-            const str = `pie accDescr: sample description + title test`;
-            const result = (await parser(str)).parseResult;
+            const string_ = `pie accDescr: sample description + title test`;
+            const { parseResult: result } = await parser(string_);
             // expect(result.parserErrors).toHaveLength(0);
             // expect(result.lexerErrors).toHaveLength(0);
 
@@ -91,8 +91,8 @@ describe('accDescr', () => {
         });
 
         it('should handle accDescr with accTitle', async () => {
-            const str = `pie accDescr: sample description + accTitle: test`;
-            const result = (await parser(str)).parseResult;
+            const string_ = `pie accDescr: sample description + accTitle: test`;
+            const { parseResult: result } = await parser(string_);
             // expect(result.parserErrors).toHaveLength(0);
             // expect(result.lexerErrors).toHaveLength(0);
 
@@ -124,8 +124,8 @@ describe('accDescr', () => {
             }
 
             `,
-        ])('should handle empty accDescr', async (str: string) => {
-            const result = (await parser(str)).parseResult;
+        ])('should handle empty accDescr', async (string_: string) => {
+            const { parseResult: result } = await parser(string_);
             expect(result.parserErrors).toHaveLength(0);
             // expect(result.lexerErrors).toHaveLength(0);
 
@@ -163,8 +163,8 @@ describe('accDescr', () => {
             }
 
             `,
-        ])('should handle regular accDescr', async (str: string) => {
-            const result = (await parser(str)).parseResult;
+        ])('should handle regular accDescr', async (string_: string) => {
+            const { parseResult: result } = await parser(string_);
             // expect(result.parserErrors).toHaveLength(0);
             // expect(result.lexerErrors).toHaveLength(0);
 
@@ -177,11 +177,11 @@ describe('accDescr', () => {
         });
 
         it.todo('should handle regular accDescr with title', async () => {
-            const str = `pie accDescr {
+            const string_ = `pie accDescr {
                 sample description +
                 title test
             }`;
-            const result = (await parser(str)).parseResult;
+            const { parseResult: result } = await parser(string_);
             // expect(result.parserErrors).toHaveLength(0);
             // expect(result.lexerErrors).toHaveLength(0);
 
@@ -192,11 +192,11 @@ describe('accDescr', () => {
         });
 
         it('should handle regular accDescr with accTitle', async () => {
-            const str = `pie accDescr {
+            const string_ = `pie accDescr {
                 sample description +
                 accTitle: test
             }`;
-            const result = (await parser(str)).parseResult;
+            const { parseResult: result } = await parser(string_);
             // expect(result.parserErrors).toHaveLength(0);
             // expect(result.lexerErrors).toHaveLength(0);
 
@@ -210,8 +210,8 @@ describe('accDescr', () => {
     describe('duplicate', () => {
         describe('inside', () => {
             it('should handle single line inside single line accDescr', async () => {
-                const str = `pie accDescr: accDescr: test`;
-                const result = (await parser(str)).parseResult;
+                const string_ = `pie accDescr: accDescr: test`;
+                const { parseResult: result } = await parser(string_);
                 // expect(result.parserErrors).toHaveLength(0);
                 // expect(result.lexerErrors).toHaveLength(0);
 
@@ -222,8 +222,8 @@ describe('accDescr', () => {
             });
 
             it('should handle multi line inside single line accDescr', async () => {
-                const str = `pie accDescr: accDescr {test}`;
-                const result = (await parser(str)).parseResult;
+                const string_ = `pie accDescr: accDescr {test}`;
+                const { parseResult: result } = await parser(string_);
                 // expect(result.parserErrors).toHaveLength(0);
                 // expect(result.lexerErrors).toHaveLength(0);
 
@@ -234,10 +234,10 @@ describe('accDescr', () => {
             });
 
             it('should handle single line inside multi line accDescr', async () => {
-                const str = `pie accDescr {
+                const string_ = `pie accDescr {
                     accDescr: test
                 }`;
-                const result = (await parser(str)).parseResult;
+                const { parseResult: result } = await parser(string_);
                 // expect(result.parserErrors).toHaveLength(0);
                 // expect(result.lexerErrors).toHaveLength(0);
 
@@ -252,9 +252,9 @@ describe('accDescr', () => {
             it.todo(
                 'should handle single line after single line accDescr',
                 async () => {
-                    const str = `pie accDescr: sample accessibility
+                    const string_ = `pie accDescr: sample accessibility
                     accDescr: test accessibility`;
-                    const result = (await parser(str)).parseResult;
+                    const { parseResult: result } = await parser(string_);
                     // expect(result.parserErrors).toHaveLength(0);
                     // expect(result.lexerErrors).toHaveLength(0);
 
@@ -268,11 +268,11 @@ describe('accDescr', () => {
             it.todo(
                 'should handle single line after multi line accDescr',
                 async () => {
-                    const str = `pie accDescr {
+                    const string_ = `pie accDescr {
                         sample accessibility
                     }
                     accDescr:`;
-                    const result = (await parser(str)).parseResult;
+                    const { parseResult: result } = await parser(string_);
                     // expect(result.parserErrors).toHaveLength(0);
                     // expect(result.lexerErrors).toHaveLength(0);
 
@@ -286,9 +286,9 @@ describe('accDescr', () => {
             it.todo(
                 'should handle multi line after single line accDescr',
                 async () => {
-                    const str = `pie accDescr: sample accessibility
+                    const string_ = `pie accDescr: sample accessibility
                     accDescr {}`;
-                    const result = (await parser(str)).parseResult;
+                    const { parseResult: result } = await parser(string_);
                     // expect(result.parserErrors).toHaveLength(0);
                     // expect(result.lexerErrors).toHaveLength(0);
 
@@ -302,13 +302,13 @@ describe('accDescr', () => {
             it.todo(
                 'should handle multi line after multi line accDescr',
                 async () => {
-                    const str = `pie accDescr {
+                    const string_ = `pie accDescr {
                         sample accessibility
                     }
                     accDescr {
 
                     }`;
-                    const result = (await parser(str)).parseResult;
+                    const { parseResult: result } = await parser(string_);
                     // expect(result.parserErrors).toHaveLength(0);
                     // expect(result.lexerErrors).toHaveLength(0);
 

@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/no-null */
 import {
     CustomPatternMatcherFunc,
     CustomPatternMatcherReturn,
@@ -7,14 +8,14 @@ import {
 import { DefaultTokenBuilder } from 'langium';
 import { TerminalRule } from 'langium/lib/grammar/generated/ast';
 
-const titleRegex = /(?:^|[ \t]+)title(?:[ \t]+([^\n]*)|$)/;
-const matchTitle: CustomPatternMatcherFunc = (str: string) => {
-    const match = titleRegex.exec(str);
-    if (match) {
-        // single line title
-        if (match[1] !== undefined) {
-            return [match[1].trim()];
-        }
+/**
+ * Matches a single title
+ */
+const titleRegex = /(?:^|[\t ]+)title(?:[\t ]+([^\n]*)|$)/;
+const matchTitle: CustomPatternMatcherFunc = (string_: string) => {
+    const match = titleRegex.exec(string_);
+    if (match && match[1] !== undefined) {
+        return [match[1].trim()];
     }
     return null;
 };
@@ -22,18 +23,14 @@ const matchTitle: CustomPatternMatcherFunc = (str: string) => {
 /**
  * Matches a single accessible title
  */
-const accTitleRegex = /(?:^|[ \t]+)accTitle[ \t]*:[ \t]*([^\n]*)?/;
-const matchAccTitle: CustomPatternMatcherFunc = (str: string) => {
+const accumulatorTitleRegex = /(?:^|[\t ]+)accTitle[\t ]*:[\t ]*([^\n]+)?/;
+const matchAccumulatorTitle: CustomPatternMatcherFunc = (string_: string) => {
     let result = null;
-    let match = accTitleRegex.exec(str);
+    let match = accumulatorTitleRegex.exec(string_);
     while (match !== null) {
-        if (match[1] !== undefined) {
-            result = [match[1].trim()];
-        } else {
-            result = null;
-        }
-        str = str.replace(match[0], '');
-        match = accTitleRegex.exec(str);
+        result = match[1] === undefined ? null : [match[1].trim()];
+        string_ = string_.replace(match[0], '');
+        match = accumulatorTitleRegex.exec(string_);
     }
     return result as CustomPatternMatcherReturn;
 };
@@ -41,10 +38,11 @@ const matchAccTitle: CustomPatternMatcherFunc = (str: string) => {
 /**
  * Matches single and multiline accessible description
  */
-const accDescrRegex =
-    /(?:^|[ \t]+)accDescr(?:[ \t]*:[ \t]*([^\n]*)?|\s*{([^}]*)?})/;
-const matchAccDescr: CustomPatternMatcherFunc = (str: string) => {
-    const match = accDescrRegex.exec(str);
+const accumulatorDescrRegex =
+    // eslint-disable-next-line regexp/strict
+    /(?:^|[\t ]+)accDescr(?:[\t ]*:[\t ]*([^\n]+)?|\s*{([^}]+)?})/;
+const matchAccumulatorDescr: CustomPatternMatcherFunc = (string_: string) => {
+    const match = accumulatorDescrRegex.exec(string_);
     if (match) {
         // single line description
         if (match[1] !== undefined) {
@@ -53,7 +51,7 @@ const matchAccDescr: CustomPatternMatcherFunc = (str: string) => {
 
         // multi line description
         if (match[2] !== undefined) {
-            const result = match[2].replace(/^\s*|\s+$/gm, '');
+            const result = match[2].replaceAll(/^\s*|\s+$/gm, '');
             return result ? [result] : null;
         }
     }
@@ -63,21 +61,31 @@ const matchAccDescr: CustomPatternMatcherFunc = (str: string) => {
 export class MermiadTokenBuilder extends DefaultTokenBuilder {
     override buildTerminalToken(terminal: TerminalRule): TokenType {
         let tokenType = super.buildTerminalToken(terminal);
-        if (tokenType.name === 'EOF') {
-            tokenType = EOF;
-        } else if (tokenType.name === 'TITLE') {
-            tokenType.LINE_BREAKS = false;
-            tokenType.PATTERN = matchTitle;
-            tokenType.START_CHARS_HINT = ['title'];
-        } else if (tokenType.name === 'ACC_TITLE') {
-            tokenType.LINE_BREAKS = false;
-            tokenType.PATTERN = matchAccTitle;
-            tokenType.START_CHARS_HINT = ['accTitle'];
-        } else if (tokenType.name === 'ACC_DESCR') {
-            tokenType.LINE_BREAKS = true;
-            tokenType.PATTERN = matchAccDescr;
-            tokenType.START_CHARS_HINT = ['accDescr'];
+        switch (tokenType.name) {
+            case 'EOF': {
+                tokenType = EOF;
+                break;
+            }
+            case 'ACC_DESCR': {
+                tokenType.LINE_BREAKS = true;
+                tokenType.PATTERN = matchAccumulatorDescr;
+                tokenType.START_CHARS_HINT = ['accDescr'];
+                break;
+            }
+            case 'ACC_TITLE': {
+                tokenType.LINE_BREAKS = false;
+                tokenType.PATTERN = matchAccumulatorTitle;
+                tokenType.START_CHARS_HINT = ['accTitle'];
+                break;
+            }
+            case 'TITLE': {
+                tokenType.LINE_BREAKS = false;
+                tokenType.PATTERN = matchTitle;
+                tokenType.START_CHARS_HINT = ['title'];
+                break;
+            }
         }
         return tokenType;
     }
 }
+/* eslint-enable unicorn/no-null */
