@@ -1,4 +1,4 @@
-import { createServicesForGrammar, LangiumDocument } from 'langium';
+import { LangiumDocument, createServicesForGrammar } from 'langium';
 import { parseHelper } from 'langium/lib/test';
 import { beforeAll, describe, expect, it } from 'vitest';
 
