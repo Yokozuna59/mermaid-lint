@@ -75,44 +75,17 @@ export const MermaidGrammar = (): Grammar => loadedMermaidGrammar ?? (loadedMerm
             "cardinality": "?"
           },
           {
-            "$type": "Group",
-            "elements": [
-              {
-                "$type": "Group",
-                "elements": [
-                  {
-                    "$type": "RuleCall",
-                    "rule": {
-                      "$ref": "#/rules@8"
-                    },
-                    "arguments": [],
-                    "cardinality": "+"
-                  },
-                  {
-                    "$type": "Assignment",
-                    "feature": "sections",
-                    "operator": "+=",
-                    "terminal": {
-                      "$type": "RuleCall",
-                      "rule": {
-                        "$ref": "#/rules@2"
-                      },
-                      "arguments": []
-                    }
-                  }
-                ],
-                "cardinality": "+"
+            "$type": "Assignment",
+            "feature": "sections",
+            "operator": "+=",
+            "terminal": {
+              "$type": "RuleCall",
+              "rule": {
+                "$ref": "#/rules@2"
               },
-              {
-                "$type": "RuleCall",
-                "rule": {
-                  "$ref": "#/rules@8"
-                },
-                "arguments": [],
-                "cardinality": "*"
-              }
-            ],
-            "cardinality": "?"
+              "arguments": []
+            },
+            "cardinality": "*"
           }
         ]
       },
@@ -155,6 +128,26 @@ export const MermaidGrammar = (): Grammar => loadedMermaidGrammar ?? (loadedMerm
               },
               "arguments": []
             }
+          },
+          {
+            "$type": "Alternatives",
+            "elements": [
+              {
+                "$type": "RuleCall",
+                "rule": {
+                  "$ref": "#/rules@6"
+                },
+                "arguments": []
+              },
+              {
+                "$type": "RuleCall",
+                "rule": {
+                  "$ref": "#/rules@8"
+                },
+                "arguments": [],
+                "cardinality": "+"
+              }
+            ]
           }
         ]
       },
