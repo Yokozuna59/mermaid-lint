@@ -1,6 +1,5 @@
 {
     "compilerOptions": {
-        "allowArbitraryExtensions": false,
         "declaration": true,
         "esModuleInterop": true,
         "module": "ES6",
