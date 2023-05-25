@@ -16,7 +16,8 @@ terminal NUMBER returns number: /[0-9]+(\.[0-9]+)?/;
 terminal STRING: /"[^"]*"/;
 
 // hidden terminals
-hidden terminal COMMENT: /%%(?!{(.|\n)*}%%).*/;
-hidden terminal DIRECTIVE: "%%{" -> "}%%\r?\n";
 hidden terminal WHITESPACE: /[ \r\t]+/;
+hidden terminal WHITESPACES: /\s/;
+hidden terminal DIRECTIVE: "%%{" -> "}%%\n";
+hidden terminal COMMENT: /%%.*/;
 hidden terminal YAML: "---\n" -> "---\n";

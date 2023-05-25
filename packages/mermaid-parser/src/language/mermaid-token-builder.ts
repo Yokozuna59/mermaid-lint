@@ -1,4 +1,3 @@
-/* eslint-disable unicorn/no-null */
 import { EOF, TokenType } from 'chevrotain';
 import { DefaultTokenBuilder } from 'langium';
 import { TerminalRule } from 'langium/lib/grammar/generated/ast';
@@ -7,12 +6,18 @@ import {
     matchAccessibilityDescr,
     matchAccessibilityTitle,
     matchTitle,
+    removeWhitespaces,
 } from './matchers';
 
 export class MermiadTokenBuilder extends DefaultTokenBuilder {
     override buildTerminalToken(terminal: TerminalRule): TokenType {
         let tokenType = super.buildTerminalToken(terminal);
         switch (tokenType.name) {
+            case 'WHITESPACES': {
+                tokenType.LINE_BREAKS = true;
+                tokenType.PATTERN = removeWhitespaces;
+                break;
+            }
             case 'EOF': {
                 tokenType = EOF;
                 break;
@@ -39,4 +44,3 @@ export class MermiadTokenBuilder extends DefaultTokenBuilder {
         return tokenType;
     }
 }
-/* eslint-enable unicorn/no-null */
