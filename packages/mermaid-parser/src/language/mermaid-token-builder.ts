@@ -1,4 +1,4 @@
-import { EOF, TokenType } from 'chevrotain';
+import { TokenType } from 'chevrotain';
 import { DefaultTokenBuilder } from 'langium';
 import { TerminalRule } from 'langium/lib/grammar/generated/ast';
 
@@ -11,15 +11,11 @@ import {
 
 export class MermiadTokenBuilder extends DefaultTokenBuilder {
     override buildTerminalToken(terminal: TerminalRule): TokenType {
-        let tokenType = super.buildTerminalToken(terminal);
+        const tokenType = super.buildTerminalToken(terminal);
         switch (tokenType.name) {
             case 'WHITESPACES': {
                 tokenType.LINE_BREAKS = true;
                 tokenType.PATTERN = removeWhitespaces;
-                break;
-            }
-            case 'EOF': {
-                tokenType = EOF;
                 break;
             }
             case 'ACC_DESCR': {
