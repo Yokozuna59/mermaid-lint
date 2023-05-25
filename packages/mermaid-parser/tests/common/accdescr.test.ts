@@ -78,7 +78,7 @@ describe('accDescr', () => {
             expect(value.accTitle).toBeUndefined();
         });
 
-        it.todo('should handle accDescr with title', async () => {
+        it('should handle accDescr with title', async () => {
             const string_ = `pie accDescr: sample description + title test`;
             const { parseResult: result } = await parser(string_);
             expect(result.parserErrors).toHaveLength(0);
@@ -176,7 +176,7 @@ describe('accDescr', () => {
             expect(value.accTitle).toBeUndefined();
         });
 
-        it.todo('should handle regular accDescr with title', async () => {
+        it('should handle regular accDescr with title', async () => {
             const string_ = `pie accDescr {
                 sample description +
                 title test
