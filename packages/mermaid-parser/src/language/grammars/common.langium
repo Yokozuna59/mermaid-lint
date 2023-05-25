@@ -17,4 +17,6 @@ terminal STRING: /"[^"]*"/;
 
 // hidden terminals
 hidden terminal COMMENT: /%%(?!{(.|\n)*}%%).*/;
+hidden terminal DIRECTIVE: "%%{" -> "}%%\r?\n";
 hidden terminal WHITESPACE: /[ \r\t]+/;
+hidden terminal YAML: "---\n" -> "---\n";

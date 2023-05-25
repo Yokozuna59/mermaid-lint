@@ -328,10 +328,66 @@ export const MermaidGrammar = (): Grammar => loadedMermaidGrammar ?? (loadedMerm
     {
       "$type": "TerminalRule",
       "hidden": true,
+      "name": "DIRECTIVE",
+      "definition": {
+        "$type": "TerminalGroup",
+        "elements": [
+          {
+            "$type": "CharacterRange",
+            "left": {
+              "$type": "Keyword",
+              "value": "%%{"
+            }
+          },
+          {
+            "$type": "UntilToken",
+            "terminal": {
+              "$type": "CharacterRange",
+              "left": {
+                "$type": "Keyword",
+                "value": "}%%\\r?\\n"
+              }
+            }
+          }
+        ]
+      },
+      "fragment": false
+    },
+    {
+      "$type": "TerminalRule",
+      "hidden": true,
       "name": "WHITESPACE",
       "definition": {
         "$type": "RegexToken",
         "regex": "[ \\\\r\\\\t]+"
+      },
+      "fragment": false
+    },
+    {
+      "$type": "TerminalRule",
+      "hidden": true,
+      "name": "YAML",
+      "definition": {
+        "$type": "TerminalGroup",
+        "elements": [
+          {
+            "$type": "CharacterRange",
+            "left": {
+              "$type": "Keyword",
+              "value": "---\\n"
+            }
+          },
+          {
+            "$type": "UntilToken",
+            "terminal": {
+              "$type": "CharacterRange",
+              "left": {
+                "$type": "Keyword",
+                "value": "---\\n"
+              }
+            }
+          }
+        ]
       },
       "fragment": false
     }
