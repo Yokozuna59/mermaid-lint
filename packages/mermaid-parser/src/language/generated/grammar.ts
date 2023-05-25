@@ -318,10 +318,20 @@ export const MermaidGrammar = (): Grammar => loadedMermaidGrammar ?? (loadedMerm
     {
       "$type": "TerminalRule",
       "hidden": true,
-      "name": "COMMENT",
+      "name": "WHITESPACE",
       "definition": {
         "$type": "RegexToken",
-        "regex": "%%(?!{(.|\\\\n)*}%%).*"
+        "regex": "[ \\\\r\\\\t]+"
+      },
+      "fragment": false
+    },
+    {
+      "$type": "TerminalRule",
+      "hidden": true,
+      "name": "WHITESPACES",
+      "definition": {
+        "$type": "RegexToken",
+        "regex": "\\\\s"
       },
       "fragment": false
     },
@@ -345,7 +355,7 @@ export const MermaidGrammar = (): Grammar => loadedMermaidGrammar ?? (loadedMerm
               "$type": "CharacterRange",
               "left": {
                 "$type": "Keyword",
-                "value": "}%%\\r?\\n"
+                "value": "}%%\\n"
               }
             }
           }
@@ -356,10 +366,10 @@ export const MermaidGrammar = (): Grammar => loadedMermaidGrammar ?? (loadedMerm
     {
       "$type": "TerminalRule",
       "hidden": true,
-      "name": "WHITESPACE",
+      "name": "COMMENT",
       "definition": {
         "$type": "RegexToken",
-        "regex": "[ \\\\r\\\\t]+"
+        "regex": "%%.*"
       },
       "fragment": false
     },
