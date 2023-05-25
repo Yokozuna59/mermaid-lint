@@ -42,8 +42,8 @@ describe('accDescr', () => {
             `,
         ])('should handle empty accDescr', async (string_: string) => {
             const { parseResult: result } = await parser(string_);
-            // expect(result.parserErrors).toHaveLength(0);
-            // expect(result.lexerErrors).toHaveLength(0);
+            expect(result.parserErrors).toHaveLength(0);
+            expect(result.lexerErrors).toHaveLength(0);
 
             const value = result.value;
             expect(value.title).toBeUndefined();
@@ -69,8 +69,8 @@ describe('accDescr', () => {
             `,
         ])('should handle regular accDescr', async (string_: string) => {
             const { parseResult: result } = await parser(string_);
-            // expect(result.parserErrors).toHaveLength(0);
-            // expect(result.lexerErrors).toHaveLength(0);
+            expect(result.parserErrors).toHaveLength(0);
+            expect(result.lexerErrors).toHaveLength(0);
 
             const value = result.value;
             expect(value.title).toBeUndefined();
@@ -81,8 +81,8 @@ describe('accDescr', () => {
         it.todo('should handle accDescr with title', async () => {
             const string_ = `pie accDescr: sample description + title test`;
             const { parseResult: result } = await parser(string_);
-            // expect(result.parserErrors).toHaveLength(0);
-            // expect(result.lexerErrors).toHaveLength(0);
+            expect(result.parserErrors).toHaveLength(0);
+            expect(result.lexerErrors).toHaveLength(0);
 
             const value = result.value;
             expect(value.title).toBeUndefined();
@@ -93,8 +93,8 @@ describe('accDescr', () => {
         it('should handle accDescr with accTitle', async () => {
             const string_ = `pie accDescr: sample description + accTitle: test`;
             const { parseResult: result } = await parser(string_);
-            // expect(result.parserErrors).toHaveLength(0);
-            // expect(result.lexerErrors).toHaveLength(0);
+            expect(result.parserErrors).toHaveLength(0);
+            expect(result.lexerErrors).toHaveLength(0);
 
             const value = result.value;
             expect(value.title).toBeUndefined();
@@ -127,7 +127,7 @@ describe('accDescr', () => {
         ])('should handle empty accDescr', async (string_: string) => {
             const { parseResult: result } = await parser(string_);
             expect(result.parserErrors).toHaveLength(0);
-            // expect(result.lexerErrors).toHaveLength(0);
+            expect(result.lexerErrors).toHaveLength(0);
 
             const value = result.value;
             expect(value.title).toBeUndefined();
@@ -165,8 +165,8 @@ describe('accDescr', () => {
             `,
         ])('should handle regular accDescr', async (string_: string) => {
             const { parseResult: result } = await parser(string_);
-            // expect(result.parserErrors).toHaveLength(0);
-            // expect(result.lexerErrors).toHaveLength(0);
+            expect(result.parserErrors).toHaveLength(0);
+            expect(result.lexerErrors).toHaveLength(0);
 
             const value = result.value;
             expect(value.title).toBeUndefined();
@@ -182,8 +182,8 @@ describe('accDescr', () => {
                 title test
             }`;
             const { parseResult: result } = await parser(string_);
-            // expect(result.parserErrors).toHaveLength(0);
-            // expect(result.lexerErrors).toHaveLength(0);
+            expect(result.parserErrors).toHaveLength(0);
+            expect(result.lexerErrors).toHaveLength(0);
 
             const value = result.value;
             expect(value.title).toBeUndefined();
@@ -197,8 +197,8 @@ describe('accDescr', () => {
                 accTitle: test
             }`;
             const { parseResult: result } = await parser(string_);
-            // expect(result.parserErrors).toHaveLength(0);
-            // expect(result.lexerErrors).toHaveLength(0);
+            expect(result.parserErrors).toHaveLength(0);
+            expect(result.lexerErrors).toHaveLength(0);
 
             const value = result.value;
             expect(value.title).toBeUndefined();
@@ -212,8 +212,8 @@ describe('accDescr', () => {
             it('should handle single line inside single line accDescr', async () => {
                 const string_ = `pie accDescr: accDescr: test`;
                 const { parseResult: result } = await parser(string_);
-                // expect(result.parserErrors).toHaveLength(0);
-                // expect(result.lexerErrors).toHaveLength(0);
+                expect(result.parserErrors).toHaveLength(0);
+                expect(result.lexerErrors).toHaveLength(0);
 
                 const value = result.value;
                 expect(value.title).toBeUndefined();
@@ -224,8 +224,8 @@ describe('accDescr', () => {
             it('should handle multi line inside single line accDescr', async () => {
                 const string_ = `pie accDescr: accDescr {test}`;
                 const { parseResult: result } = await parser(string_);
-                // expect(result.parserErrors).toHaveLength(0);
-                // expect(result.lexerErrors).toHaveLength(0);
+                expect(result.parserErrors).toHaveLength(0);
+                expect(result.lexerErrors).toHaveLength(0);
 
                 const value = result.value;
                 expect(value.title).toBeUndefined();
@@ -238,8 +238,8 @@ describe('accDescr', () => {
                     accDescr: test
                 }`;
                 const { parseResult: result } = await parser(string_);
-                // expect(result.parserErrors).toHaveLength(0);
-                // expect(result.lexerErrors).toHaveLength(0);
+                expect(result.parserErrors).toHaveLength(0);
+                expect(result.lexerErrors).toHaveLength(0);
 
                 const value = result.value;
                 expect(value.title).toBeUndefined();
@@ -255,8 +255,8 @@ describe('accDescr', () => {
                     const string_ = `pie accDescr: sample accessibility
                     accDescr: test accessibility`;
                     const { parseResult: result } = await parser(string_);
-                    // expect(result.parserErrors).toHaveLength(0);
-                    // expect(result.lexerErrors).toHaveLength(0);
+                    expect(result.parserErrors).toHaveLength(0);
+                    expect(result.lexerErrors).toHaveLength(0);
 
                     const value = result.value;
                     expect(value.title).toBeUndefined();
@@ -273,8 +273,8 @@ describe('accDescr', () => {
                     }
                     accDescr:`;
                     const { parseResult: result } = await parser(string_);
-                    // expect(result.parserErrors).toHaveLength(0);
-                    // expect(result.lexerErrors).toHaveLength(0);
+                    expect(result.parserErrors).toHaveLength(0);
+                    expect(result.lexerErrors).toHaveLength(0);
 
                     const value = result.value;
                     expect(value.title).toBeUndefined();
@@ -289,8 +289,8 @@ describe('accDescr', () => {
                     const string_ = `pie accDescr: sample accessibility
                     accDescr {}`;
                     const { parseResult: result } = await parser(string_);
-                    // expect(result.parserErrors).toHaveLength(0);
-                    // expect(result.lexerErrors).toHaveLength(0);
+                    expect(result.parserErrors).toHaveLength(0);
+                    expect(result.lexerErrors).toHaveLength(0);
 
                     const value = result.value;
                     expect(value.title).toBeUndefined();
@@ -309,8 +309,8 @@ describe('accDescr', () => {
 
                     }`;
                     const { parseResult: result } = await parser(string_);
-                    // expect(result.parserErrors).toHaveLength(0);
-                    // expect(result.lexerErrors).toHaveLength(0);
+                    expect(result.parserErrors).toHaveLength(0);
+                    expect(result.lexerErrors).toHaveLength(0);
 
                     const value = result.value;
                     expect(value.title).toBeUndefined();

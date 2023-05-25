@@ -103,8 +103,8 @@ describe('when parsing pie chart', () => {
         'should handle valid pie + title in same line',
         async (string_: string) => {
             const { parseResult: result } = await parser(string_);
-            // expect(result.parserErrors).toHaveLength(0);
-            // expect(result.lexerErrors).toHaveLength(0);
+            expect(result.parserErrors).toHaveLength(0);
+            expect(result.lexerErrors).toHaveLength(0);
 
             const value = result.value;
             expect(value.$type).toBe(PieChart);
@@ -140,8 +140,8 @@ describe('when parsing pie chart', () => {
         'should handle valid pie + title in different line',
         async (string_: string) => {
             const { parseResult: result } = await parser(string_);
-            // expect(result.parserErrors).toHaveLength(0);
-            // expect(result.lexerErrors).toHaveLength(0);
+            expect(result.parserErrors).toHaveLength(0);
+            expect(result.lexerErrors).toHaveLength(0);
 
             const value = result.value;
             expect(value.$type).toBe(PieChart);
@@ -163,8 +163,8 @@ describe('when parsing pie chart', () => {
         'should handle valid pie + showData + title',
         async (string_: string) => {
             const { parseResult: result } = await parser(string_);
-            // expect(result.parserErrors).toHaveLength(0);
-            // expect(result.lexerErrors).toHaveLength(0);
+            expect(result.parserErrors).toHaveLength(0);
+            expect(result.lexerErrors).toHaveLength(0);
 
             const value = result.value;
             expect(value.$type).toBe(PieChart);
@@ -200,8 +200,8 @@ describe('when parsing pie chart', () => {
         'should handle valid pie + showData + title in different line',
         async (string_: string) => {
             const { parseResult: result } = await parser(string_);
-            // expect(result.parserErrors).toHaveLength(0);
-            // expect(result.lexerErrors).toHaveLength(0);
+            expect(result.parserErrors).toHaveLength(0);
+            expect(result.lexerErrors).toHaveLength(0);
 
             const value = result.value;
             expect(value.$type).toBe(PieChart);
