@@ -78,7 +78,7 @@ describe('accTitle', () => {
             expect(value.accTitle).toBe('sample accessibility');
         });
 
-        it.todo('should handle accTitle with title', async () => {
+        it('should handle accTitle with title', async () => {
             const string_ = `pie accTitle: sample accessibility + title test`;
             const { parseResult: result } = await parser(string_);
             expect(result.parserErrors).toHaveLength(0);
