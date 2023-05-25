@@ -12,12 +12,12 @@
     "bugs": {
         "url": "https://github.com/Yokozuna59/mermaid-lint/issues"
     },
-    "main": "dist/src/index.js",
-    "types": "dist/types/index.d.ts",
+    "main": "dist/index.js",
     "files": [
         "dist/"
     ],
     "scripts": {
+        "build": "tsc",
         "clean": "rimraf dist",
         "langium:generate": "langium generate"
     },
