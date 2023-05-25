@@ -1,14 +1,13 @@
 /* fragments */
 fragment TITLE_AND_ACCESSIBILITIES:
-    accDescr=ACC_DESCR & accTitle=ACC_TITLE & title=TITLE
-    (EOF | NEWLINE+)
+    accDescr=ACC_DESCR+ & accTitle=ACC_TITLE+ & title=TITLE+
+    NEWLINE*
 ;
 
 /* terminals */
 // placeholder terminals
 terminal ACC_DESCR: /accDescr/;
 terminal ACC_TITLE: /accTitle/;
-terminal EOF: /\z/;
 terminal TITLE: /title/;
 
 terminal NEWLINE: /\n/;
