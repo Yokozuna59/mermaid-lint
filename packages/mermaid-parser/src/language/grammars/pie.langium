@@ -5,9 +5,9 @@ entry PieChart:
     NEWLINE*
     "pie" (showData?="showData")? NEWLINE*
     TITLE_AND_ACCESSIBILITIES?
-    sections+=Section*
+    ((NEWLINE+ sections+=Section)+ NEWLINE*)?
 ;
 
 Section:
-    label=STRING ":" value=NUMBER (EOF | NEWLINE+)
+    label=STRING ":" value=NUMBER
 ;
