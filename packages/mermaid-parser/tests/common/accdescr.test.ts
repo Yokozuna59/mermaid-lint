@@ -1,27 +1,10 @@
-import { LangiumDocument, createServicesForGrammar } from 'langium';
-import { parseHelper } from 'langium/lib/test';
-import { beforeAll, describe, expect, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
-import {
-    Mermaid,
-    MermaidGrammar,
-    MermiadTokenBuilder,
-} from '../../src/language';
+import { Mermaid } from '../../src/language';
+import { createTestServices } from '../test-utils';
 
 describe('accDescr', () => {
-    let parser: (input: string) => Promise<LangiumDocument<Mermaid>>;
-
-    beforeAll(async () => {
-        const services = await createServicesForGrammar({
-            grammar: MermaidGrammar(),
-            module: {
-                parser: {
-                    TokenBuilder: () => new MermiadTokenBuilder(),
-                },
-            },
-        });
-        parser = parseHelper<Mermaid>(services);
-    });
+    const { parse } = createTestServices<Mermaid>();
 
     describe('single line', () => {
         it.each([
@@ -41,7 +24,7 @@ describe('accDescr', () => {
 
             `,
         ])('should handle empty accDescr', async (string_: string) => {
-            const { parseResult: result } = await parser(string_);
+            const { parseResult: result } = await parse(string_);
             expect(result.parserErrors).toHaveLength(0);
             expect(result.lexerErrors).toHaveLength(0);
 
@@ -68,7 +51,7 @@ describe('accDescr', () => {
 
             `,
         ])('should handle regular accDescr', async (string_: string) => {
-            const { parseResult: result } = await parser(string_);
+            const { parseResult: result } = await parse(string_);
             expect(result.parserErrors).toHaveLength(0);
             expect(result.lexerErrors).toHaveLength(0);
 
@@ -80,7 +63,7 @@ describe('accDescr', () => {
 
         it('should handle accDescr with title', async () => {
             const string_ = `pie accDescr: sample description + title test`;
-            const { parseResult: result } = await parser(string_);
+            const { parseResult: result } = await parse(string_);
             expect(result.parserErrors).toHaveLength(0);
             expect(result.lexerErrors).toHaveLength(0);
 
@@ -92,7 +75,7 @@ describe('accDescr', () => {
 
         it('should handle accDescr with accTitle', async () => {
             const string_ = `pie accDescr: sample description + accTitle: test`;
-            const { parseResult: result } = await parser(string_);
+            const { parseResult: result } = await parse(string_);
             expect(result.parserErrors).toHaveLength(0);
             expect(result.lexerErrors).toHaveLength(0);
 
@@ -125,7 +108,7 @@ describe('accDescr', () => {
 
             `,
         ])('should handle empty accDescr', async (string_: string) => {
-            const { parseResult: result } = await parser(string_);
+            const { parseResult: result } = await parse(string_);
             expect(result.parserErrors).toHaveLength(0);
             expect(result.lexerErrors).toHaveLength(0);
 
@@ -164,7 +147,7 @@ describe('accDescr', () => {
 
             `,
         ])('should handle regular accDescr', async (string_: string) => {
-            const { parseResult: result } = await parser(string_);
+            const { parseResult: result } = await parse(string_);
             expect(result.parserErrors).toHaveLength(0);
             expect(result.lexerErrors).toHaveLength(0);
 
@@ -181,7 +164,7 @@ describe('accDescr', () => {
                 sample description +
                 title test
             }`;
-            const { parseResult: result } = await parser(string_);
+            const { parseResult: result } = await parse(string_);
             expect(result.parserErrors).toHaveLength(0);
             expect(result.lexerErrors).toHaveLength(0);
 
@@ -196,7 +179,7 @@ describe('accDescr', () => {
                 sample description +
                 accTitle: test
             }`;
-            const { parseResult: result } = await parser(string_);
+            const { parseResult: result } = await parse(string_);
             expect(result.parserErrors).toHaveLength(0);
             expect(result.lexerErrors).toHaveLength(0);
 
@@ -211,7 +194,7 @@ describe('accDescr', () => {
         describe('inside', () => {
             it('should handle single line inside single line accDescr', async () => {
                 const string_ = `pie accDescr: accDescr: test`;
-                const { parseResult: result } = await parser(string_);
+                const { parseResult: result } = await parse(string_);
                 expect(result.parserErrors).toHaveLength(0);
                 expect(result.lexerErrors).toHaveLength(0);
 
@@ -223,7 +206,7 @@ describe('accDescr', () => {
 
             it('should handle multi line inside single line accDescr', async () => {
                 const string_ = `pie accDescr: accDescr {test}`;
-                const { parseResult: result } = await parser(string_);
+                const { parseResult: result } = await parse(string_);
                 expect(result.parserErrors).toHaveLength(0);
                 expect(result.lexerErrors).toHaveLength(0);
 
@@ -237,7 +220,7 @@ describe('accDescr', () => {
                 const string_ = `pie accDescr {
                     accDescr: test
                 }`;
-                const { parseResult: result } = await parser(string_);
+                const { parseResult: result } = await parse(string_);
                 expect(result.parserErrors).toHaveLength(0);
                 expect(result.lexerErrors).toHaveLength(0);
 
@@ -254,7 +237,7 @@ describe('accDescr', () => {
                 async () => {
                     const string_ = `pie accDescr: sample accessibility
                     accDescr: test accessibility`;
-                    const { parseResult: result } = await parser(string_);
+                    const { parseResult: result } = await parse(string_);
                     expect(result.parserErrors).toHaveLength(0);
                     expect(result.lexerErrors).toHaveLength(0);
 
@@ -272,7 +255,7 @@ describe('accDescr', () => {
                         sample accessibility
                     }
                     accDescr:`;
-                    const { parseResult: result } = await parser(string_);
+                    const { parseResult: result } = await parse(string_);
                     expect(result.parserErrors).toHaveLength(0);
                     expect(result.lexerErrors).toHaveLength(0);
 
@@ -288,7 +271,7 @@ describe('accDescr', () => {
                 async () => {
                     const string_ = `pie accDescr: sample accessibility
                     accDescr {}`;
-                    const { parseResult: result } = await parser(string_);
+                    const { parseResult: result } = await parse(string_);
                     expect(result.parserErrors).toHaveLength(0);
                     expect(result.lexerErrors).toHaveLength(0);
 
@@ -308,7 +291,7 @@ describe('accDescr', () => {
                     accDescr {
 
                     }`;
-                    const { parseResult: result } = await parser(string_);
+                    const { parseResult: result } = await parse(string_);
                     expect(result.parserErrors).toHaveLength(0);
                     expect(result.lexerErrors).toHaveLength(0);
 

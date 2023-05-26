@@ -1,28 +1,10 @@
-import { LangiumDocument, createServicesForGrammar } from 'langium';
-import { parseHelper } from 'langium/lib/test';
-import { beforeAll, describe, expect, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
-import {
-    Mermaid,
-    MermaidGrammar,
-    MermiadTokenBuilder,
-    PieChart,
-} from '../../src/language';
+import { PieChart } from '../../src/language';
+import { createTestServices } from '../test-utils';
 
-describe('when parsing pie chart', () => {
-    let parser: (input: string) => Promise<LangiumDocument<Mermaid>>;
-
-    beforeAll(async () => {
-        const services = await createServicesForGrammar({
-            grammar: MermaidGrammar(),
-            module: {
-                parser: {
-                    TokenBuilder: () => new MermiadTokenBuilder(),
-                },
-            },
-        });
-        parser = parseHelper<Mermaid>(services);
-    });
+describe('pie chart', () => {
+    const { parse } = createTestServices<PieChart>();
 
     // pie
     it.each([
@@ -41,8 +23,8 @@ describe('when parsing pie chart', () => {
         \tpie
 
         `,
-    ])('should handle valid pie', async (string_: string) => {
-        const { parseResult: result } = await parser(string_);
+    ])('should handle regular pie', async (string_: string) => {
+        const { parseResult: result } = await parse(string_);
         expect(result.parserErrors).toHaveLength(0);
         expect(result.lexerErrors).toHaveLength(0);
 
@@ -53,7 +35,7 @@ describe('when parsing pie chart', () => {
         expect(value.sections).toHaveLength(0);
     });
 
-    // pie + showData
+    // showData
     it.each([
         // without whitespaces
         `pie showData`,
@@ -70,8 +52,8 @@ describe('when parsing pie chart', () => {
         pie\tshowData
 
         `,
-    ])('should handle valid pie + showData', async (string_: string) => {
-        const { parseResult: result } = await parser(string_);
+    ])('should handle regular showData', async (string_: string) => {
+        const { parseResult: result } = await parse(string_);
         expect(result.parserErrors).toHaveLength(0);
         expect(result.lexerErrors).toHaveLength(0);
 
@@ -82,7 +64,7 @@ describe('when parsing pie chart', () => {
         expect(value.sections).toHaveLength(0);
     });
 
-    // pie + title
+    // title
     it.each([
         // without whitespaces
         `pie title sample title`,
@@ -100,9 +82,9 @@ describe('when parsing pie chart', () => {
 
         `,
     ])(
-        'should handle valid pie + title in same line',
+        'should handle regular pie + title in same line',
         async (string_: string) => {
-            const { parseResult: result } = await parser(string_);
+            const { parseResult: result } = await parse(string_);
             expect(result.parserErrors).toHaveLength(0);
             expect(result.lexerErrors).toHaveLength(0);
 
@@ -137,9 +119,9 @@ describe('when parsing pie chart', () => {
 
         `,
     ])(
-        'should handle valid pie + title in different line',
+        'should handle regular pie + title in different line',
         async (string_: string) => {
-            const { parseResult: result } = await parser(string_);
+            const { parseResult: result } = await parse(string_);
             expect(result.parserErrors).toHaveLength(0);
             expect(result.lexerErrors).toHaveLength(0);
 
@@ -151,7 +133,7 @@ describe('when parsing pie chart', () => {
         },
     );
 
-    // pie + showData + title
+    // showData + title
     it.each([
         // without newlines
         `pie showData title sample title`,
@@ -160,9 +142,9 @@ describe('when parsing pie chart', () => {
         `pie showData title sample title
         `,
     ])(
-        'should handle valid pie + showData + title',
+        'should handle regular pie + showData + title',
         async (string_: string) => {
-            const { parseResult: result } = await parser(string_);
+            const { parseResult: result } = await parse(string_);
             expect(result.parserErrors).toHaveLength(0);
             expect(result.lexerErrors).toHaveLength(0);
 
@@ -174,7 +156,7 @@ describe('when parsing pie chart', () => {
         },
     );
 
-    // pie + showData + \n + title
+    // showData + \n + title
     it.each([
         // without newlines
         `pie showData
@@ -197,9 +179,9 @@ describe('when parsing pie chart', () => {
 
         `,
     ])(
-        'should handle valid pie + showData + title in different line',
+        'should handle regular showData + title in different line',
         async (string_: string) => {
-            const { parseResult: result } = await parser(string_);
+            const { parseResult: result } = await parse(string_);
             expect(result.parserErrors).toHaveLength(0);
             expect(result.lexerErrors).toHaveLength(0);
 
