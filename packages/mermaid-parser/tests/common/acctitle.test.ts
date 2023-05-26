@@ -1,27 +1,10 @@
-import { LangiumDocument, createServicesForGrammar } from 'langium';
-import { parseHelper } from 'langium/lib/test';
-import { beforeAll, describe, expect, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
-import {
-    Mermaid,
-    MermaidGrammar,
-    MermiadTokenBuilder,
-} from '../../src/language';
+import { Mermaid } from '../../src/language';
+import { createTestServices } from '../test-utils';
 
 describe('accTitle', () => {
-    let parser: (input: string) => Promise<LangiumDocument<Mermaid>>;
-
-    beforeAll(async () => {
-        const services = await createServicesForGrammar({
-            grammar: MermaidGrammar(),
-            module: {
-                parser: {
-                    TokenBuilder: () => new MermiadTokenBuilder(),
-                },
-            },
-        });
-        parser = parseHelper<Mermaid>(services);
-    });
+    const { parse } = createTestServices<Mermaid>();
 
     describe('normal', () => {
         it.each([
@@ -41,7 +24,7 @@ describe('accTitle', () => {
 
             `,
         ])('should handle empty accTitle', async (string_: string) => {
-            const { parseResult: result } = await parser(string_);
+            const { parseResult: result } = await parse(string_);
             expect(result.parserErrors).toHaveLength(0);
             expect(result.lexerErrors).toHaveLength(0);
 
@@ -68,7 +51,7 @@ describe('accTitle', () => {
 
             `,
         ])('should handle regular accTitle', async (string_: string) => {
-            const { parseResult: result } = await parser(string_);
+            const { parseResult: result } = await parse(string_);
             expect(result.parserErrors).toHaveLength(0);
             expect(result.lexerErrors).toHaveLength(0);
 
@@ -80,7 +63,7 @@ describe('accTitle', () => {
 
         it('should handle accTitle with title', async () => {
             const string_ = `pie accTitle: sample accessibility + title test`;
-            const { parseResult: result } = await parser(string_);
+            const { parseResult: result } = await parse(string_);
             expect(result.parserErrors).toHaveLength(0);
             expect(result.lexerErrors).toHaveLength(0);
 
@@ -94,7 +77,7 @@ describe('accTitle', () => {
             'should handle accTitle with single line accDescr',
             async () => {
                 const string_ = `pie accTitle: sample description + accDescr: test`;
-                const { parseResult: result } = await parser(string_);
+                const { parseResult: result } = await parse(string_);
                 expect(result.parserErrors).toHaveLength(0);
                 expect(result.lexerErrors).toHaveLength(0);
 
@@ -109,7 +92,7 @@ describe('accTitle', () => {
 
         it.todo('should handle accTitle with multi line accDescr', async () => {
             const string_ = `pie accTitle: sample description + accDescr {test}`;
-            const { parseResult: result } = await parser(string_);
+            const { parseResult: result } = await parse(string_);
             expect(result.parserErrors).toHaveLength(0);
             expect(result.lexerErrors).toHaveLength(0);
 
@@ -124,7 +107,7 @@ describe('accTitle', () => {
         describe('inside', () => {
             it('should handle accTitle inside accTitle', async () => {
                 const string_ = `pie accTitle: accTitle: test`;
-                const { parseResult: result } = await parser(string_);
+                const { parseResult: result } = await parse(string_);
                 expect(result.parserErrors).toHaveLength(0);
                 expect(result.lexerErrors).toHaveLength(0);
 
@@ -139,7 +122,7 @@ describe('accTitle', () => {
             it('should handle regular accTitle after empty accTitle', async () => {
                 const string_ = `pie accTitle:
                 accTitle: sample accessibility`;
-                const { parseResult: result } = await parser(string_);
+                const { parseResult: result } = await parse(string_);
                 expect(result.parserErrors).toHaveLength(0);
                 expect(result.lexerErrors).toHaveLength(0);
 
@@ -152,7 +135,7 @@ describe('accTitle', () => {
             it('should handle empty accTitle after regular accTitle', async () => {
                 const string_ = `pie accTitle: sample accessibility
                 accTitle:`;
-                const { parseResult: result } = await parser(string_);
+                const { parseResult: result } = await parse(string_);
                 expect(result.parserErrors).toHaveLength(0);
                 expect(result.lexerErrors).toHaveLength(0);
 
@@ -165,7 +148,7 @@ describe('accTitle', () => {
             it('should handle regular accTitle after regular accTitle', async () => {
                 const string_ = `pie accTitle: test accessibility
                 accTitle: sample accessibility`;
-                const { parseResult: result } = await parser(string_);
+                const { parseResult: result } = await parse(string_);
                 expect(result.parserErrors).toHaveLength(0);
                 expect(result.lexerErrors).toHaveLength(0);
 

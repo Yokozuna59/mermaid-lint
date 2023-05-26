@@ -1,27 +1,10 @@
-import { LangiumDocument, createServicesForGrammar } from 'langium';
-import { parseHelper } from 'langium/lib/test';
-import { beforeAll, describe, expect, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
-import {
-    Mermaid,
-    MermaidGrammar,
-    MermiadTokenBuilder,
-} from '../../src/language';
+import { Mermaid } from '../../src/language';
+import { createTestServices } from '../test-utils';
 
 describe('all', () => {
-    let parser: (input: string) => Promise<LangiumDocument<Mermaid>>;
-
-    beforeAll(async () => {
-        const services = await createServicesForGrammar({
-            grammar: MermaidGrammar(),
-            module: {
-                parser: {
-                    TokenBuilder: () => new MermiadTokenBuilder(),
-                },
-            },
-        });
-        parser = parseHelper<Mermaid>(services);
-    });
+    const { parse } = createTestServices<Mermaid>();
 
     describe('title', () => {
         it.todo('title then accTitle then single line accDescr', async () => {
@@ -29,7 +12,7 @@ describe('all', () => {
             title sample
             accTitle: test
             accDescr: wow`;
-            const { parseResult: result } = await parser(string_);
+            const { parseResult: result } = await parse(string_);
             expect(result.parserErrors).toHaveLength(0);
             expect(result.lexerErrors).toHaveLength(0);
 
@@ -46,7 +29,7 @@ describe('all', () => {
             accDescr {
                 wow
             }`;
-            const { parseResult: result } = await parser(string_);
+            const { parseResult: result } = await parse(string_);
             expect(result.parserErrors).toHaveLength(0);
             expect(result.lexerErrors).toHaveLength(0);
 
@@ -61,7 +44,7 @@ describe('all', () => {
             title sample
             accDescr: wow
             accTitle: test`;
-            const { parseResult: result } = await parser(string_);
+            const { parseResult: result } = await parse(string_);
             expect(result.parserErrors).toHaveLength(0);
             expect(result.lexerErrors).toHaveLength(0);
 
@@ -78,7 +61,7 @@ describe('all', () => {
                 wow
             }
             accTitle: test`;
-            const { parseResult: result } = await parser(string_);
+            const { parseResult: result } = await parse(string_);
             expect(result.parserErrors).toHaveLength(0);
             expect(result.lexerErrors).toHaveLength(0);
 
@@ -95,7 +78,7 @@ describe('all', () => {
             accTitle: test
             title sample
             accDescr: wow`;
-            const { parseResult: result } = await parser(string_);
+            const { parseResult: result } = await parse(string_);
             expect(result.parserErrors).toHaveLength(0);
             expect(result.lexerErrors).toHaveLength(0);
 
@@ -112,7 +95,7 @@ describe('all', () => {
             accDescr {
                 wow
             }`;
-            const { parseResult: result } = await parser(string_);
+            const { parseResult: result } = await parse(string_);
             expect(result.parserErrors).toHaveLength(0);
             expect(result.lexerErrors).toHaveLength(0);
 
@@ -127,7 +110,7 @@ describe('all', () => {
             accTitle: test
             accDescr: wow
             title sample`;
-            const { parseResult: result } = await parser(string_);
+            const { parseResult: result } = await parse(string_);
             expect(result.parserErrors).toHaveLength(0);
             expect(result.lexerErrors).toHaveLength(0);
 
@@ -144,7 +127,7 @@ describe('all', () => {
                 wow
             }
             title sample`;
-            const { parseResult: result } = await parser(string_);
+            const { parseResult: result } = await parse(string_);
             expect(result.parserErrors).toHaveLength(0);
             expect(result.lexerErrors).toHaveLength(0);
 
@@ -162,7 +145,7 @@ describe('all', () => {
                 accDescr: wow
                 accTitle: test
                 title sample`;
-                const { parseResult: result } = await parser(string_);
+                const { parseResult: result } = await parse(string_);
                 expect(result.parserErrors).toHaveLength(0);
                 expect(result.lexerErrors).toHaveLength(0);
 
@@ -177,7 +160,7 @@ describe('all', () => {
                 accTitle: test
                 accDescr: wow
                 title sample`;
-                const { parseResult: result } = await parser(string_);
+                const { parseResult: result } = await parse(string_);
                 expect(result.parserErrors).toHaveLength(0);
                 expect(result.lexerErrors).toHaveLength(0);
 
@@ -196,7 +179,7 @@ describe('all', () => {
                 }
                 accTitle: test
                 title sample`;
-                const { parseResult: result } = await parser(string_);
+                const { parseResult: result } = await parse(string_);
                 expect(result.parserErrors).toHaveLength(0);
                 expect(result.lexerErrors).toHaveLength(0);
 
@@ -213,7 +196,7 @@ describe('all', () => {
                 }
                 title sample
                 accTitle: test`;
-                const { parseResult: result } = await parser(string_);
+                const { parseResult: result } = await parse(string_);
                 expect(result.parserErrors).toHaveLength(0);
                 expect(result.lexerErrors).toHaveLength(0);
 
