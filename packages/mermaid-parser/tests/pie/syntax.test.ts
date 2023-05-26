@@ -192,4 +192,170 @@ describe('pie chart', () => {
             expect(value.sections).toHaveLength(0);
         },
     );
+
+    describe('sections', () => {
+        it.each([
+            // without whitespaces
+            `pie
+            "GitHub":100
+            "GitLab":50`,
+
+            // with spaces
+            `pie
+            "GitHub"   :   100
+            "GitLab"   :   50`,
+
+            // with tabs
+            `pie
+            "GitHub"\t:\t100
+            "GitLab"\t:\t50`,
+
+            // extra whitespaces
+            `pie
+
+            \t"GitHub" \t : \t 100
+
+            \t"GitLab" \t : \t  50
+
+            `,
+        ])('should handle regular secions', async (string_: string) => {
+            const { parseResult: result } = await parse(string_);
+            expect(result.parserErrors).toHaveLength(0);
+            expect(result.lexerErrors).toHaveLength(0);
+
+            const value = result.value;
+            const section0 = value.sections[0];
+            expect(section0?.label).toBe('GitHub');
+            expect(section0?.value).toBe(100);
+
+            const section1 = value.sections[1];
+            expect(section1?.label).toBe('GitLab');
+            expect(section1?.value).toBe(50);
+
+            expect(value.showData).toBeFalsy();
+            expect(value.title).toBeUndefined();
+            expect(value.accDescr).toBeUndefined();
+            expect(value.accTitle).toBeUndefined();
+        });
+
+        it('should handle sections with showData', async () => {
+            const string_ = `pie showData
+            "GitHub": 100
+            "GitLab": 50`;
+            const { parseResult: result } = await parse(string_);
+            expect(result.parserErrors).toHaveLength(0);
+            expect(result.lexerErrors).toHaveLength(0);
+
+            const value = result.value;
+            const section0 = value.sections[0];
+            expect(section0?.label).toBe('GitHub');
+            expect(section0?.value).toBe(100);
+
+            const section1 = value.sections[1];
+            expect(section1?.label).toBe('GitLab');
+            expect(section1?.value).toBe(50);
+
+            expect(value.showData).toBeTruthy();
+            expect(value.title).toBeUndefined();
+            expect(value.accDescr).toBeUndefined();
+            expect(value.accTitle).toBeUndefined();
+        });
+
+        it.todo('should handle sections with title', async () => {
+            const string_ = `pie title sample wow
+            "GitHub": 100
+            "GitLab": 50`;
+            const { parseResult: result } = await parse(string_);
+            expect(result.parserErrors).toHaveLength(0);
+            expect(result.lexerErrors).toHaveLength(0);
+
+            const value = result.value;
+            const section0 = value.sections[0];
+            expect(section0?.label).toBe('GitHub');
+            expect(section0?.value).toBe(100);
+
+            const section1 = value.sections[1];
+            expect(section1?.label).toBe('GitLab');
+            expect(section1?.value).toBe(50);
+
+            expect(value.showData).toBeFalsy();
+            expect(value.title).toBe('sample wow');
+            expect(value.accDescr).toBeUndefined();
+            expect(value.accTitle).toBeUndefined();
+        });
+
+        it.todo('should handle sections with accTitle', async () => {
+            const string_ = `pie accTitle: sample wow
+            "GitHub": 100
+            "GitLab": 50`;
+            const { parseResult: result } = await parse(string_);
+            expect(result.parserErrors).toHaveLength(0);
+            expect(result.lexerErrors).toHaveLength(0);
+
+            const value = result.value;
+            const section0 = value.sections[0];
+            expect(section0?.label).toBe('GitHub');
+            expect(section0?.value).toBe(100);
+
+            const section1 = value.sections[1];
+            expect(section1?.label).toBe('GitLab');
+            expect(section1?.value).toBe(50);
+
+            expect(value.showData).toBeFalsy();
+            expect(value.title).toBeUndefined();
+            expect(value.accDescr).toBeUndefined();
+            expect(value.accTitle).toBe('sample wow');
+        });
+
+        it.todo(
+            'should handle sections with single line accDescr',
+            async () => {
+                const string_ = `pie accDescr: sample wow
+            "GitHub": 100
+            "GitLab": 50`;
+                const { parseResult: result } = await parse(string_);
+                expect(result.parserErrors).toHaveLength(0);
+                expect(result.lexerErrors).toHaveLength(0);
+
+                const value = result.value;
+                const section0 = value.sections[0];
+                expect(section0?.label).toBe('GitHub');
+                expect(section0?.value).toBe(100);
+
+                const section1 = value.sections[1];
+                expect(section1?.label).toBe('GitLab');
+                expect(section1?.value).toBe(50);
+
+                expect(value.showData).toBeFalsy();
+                expect(value.title).toBeUndefined();
+                expect(value.accDescr).toBe('sample wow');
+                expect(value.accTitle).toBeUndefined();
+            },
+        );
+
+        it.todo('should handle sections with multi line accDescr', async () => {
+            const string_ = `pie accDescr {
+                sample wow
+            }
+            "GitHub": 100
+            "GitLab": 50`;
+            const { parseResult: result } = await parse(string_);
+            expect(result.parserErrors).toHaveLength(0);
+            expect(result.lexerErrors).toHaveLength(0);
+
+            const value = result.value;
+            const section0 = value.sections[0];
+            expect(section0?.label).toBe('GitHub');
+            expect(section0?.value).toBe(100);
+
+            const section1 = value.sections[1];
+            expect(section1?.label).toBe('GitLab');
+            expect(section1?.value).toBe(50);
+
+            expect(value.showData).toBeFalsy();
+            expect(value.title).toBeUndefined();
+            expect(value.accDescr).toBe('sample wow');
+            expect(value.accTitle).toBeUndefined();
+        });
+    });
 });
