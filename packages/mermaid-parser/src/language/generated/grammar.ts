@@ -170,7 +170,7 @@ export const MermaidGrammar = (): Grammar => loadedMermaidGrammar ?? (loadedMerm
       "name": "TITLE_AND_ACCESSIBILITIES",
       "fragment": true,
       "definition": {
-        "$type": "UnorderedGroup",
+        "$type": "Alternatives",
         "elements": [
           {
             "$type": "Assignment",
@@ -182,8 +182,7 @@ export const MermaidGrammar = (): Grammar => loadedMermaidGrammar ?? (loadedMerm
                 "$ref": "#/rules@4"
               },
               "arguments": []
-            },
-            "cardinality": "+"
+            }
           },
           {
             "$type": "Assignment",
@@ -195,36 +194,22 @@ export const MermaidGrammar = (): Grammar => loadedMermaidGrammar ?? (loadedMerm
                 "$ref": "#/rules@5"
               },
               "arguments": []
-            },
-            "cardinality": "+"
+            }
           },
           {
-            "$type": "Group",
-            "elements": [
-              {
-                "$type": "Assignment",
-                "feature": "title",
-                "operator": "=",
-                "terminal": {
-                  "$type": "RuleCall",
-                  "rule": {
-                    "$ref": "#/rules@6"
-                  },
-                  "arguments": []
-                },
-                "cardinality": "+"
+            "$type": "Assignment",
+            "feature": "title",
+            "operator": "=",
+            "terminal": {
+              "$type": "RuleCall",
+              "rule": {
+                "$ref": "#/rules@6"
               },
-              {
-                "$type": "RuleCall",
-                "rule": {
-                  "$ref": "#/rules@7"
-                },
-                "arguments": [],
-                "cardinality": "*"
-              }
-            ]
+              "arguments": []
+            }
           }
-        ]
+        ],
+        "cardinality": "+"
       },
       "definesHiddenTokens": false,
       "entry": false,
