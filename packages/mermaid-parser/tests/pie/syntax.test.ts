@@ -364,7 +364,7 @@ describe('pie chart', () => {
         });
 
         describe('duplicate', () => {
-            it.todo('should handle duplicate sections', async () => {
+            it('should handle duplicate sections', async () => {
                 const string_ = `pie
                 "GitHub": 100
                 "GitHub": 50`;
@@ -375,7 +375,11 @@ describe('pie chart', () => {
                 const value = result.value;
                 const section0 = value.sections[0];
                 expect(section0?.label).toBe('GitHub');
-                expect(section0?.value).toBe(50);
+                expect(section0?.value).toBe(100);
+
+                const section1 = value.sections[1];
+                expect(section1?.label).toBe('GitHub');
+                expect(section1?.value).toBe(50);
 
                 expect(value.showData).toBeFalsy();
                 expect(value.title).toBeUndefined();
