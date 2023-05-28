@@ -17,8 +17,8 @@
     "scripts": {
         "clean": "rimraf coverage && pnpm run --recursive clean",
         "coverage": "vitest run --coverage",
-        "format": "prettier --parser=typescript --write \"**/*.ts\"",
-        "lint": "eslint --ext ts --fix .",
+        "format": "prettier --write \"**/*.{json,ts}\" && markdownlint --dot --fix .",
+        "lint": "eslint --ext ts --fix . && markdownlint --dot --fix .",
         "prepare": "husky install",
         "test": "vitest"
     },
