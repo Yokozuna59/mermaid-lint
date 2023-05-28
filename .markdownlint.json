@@ -6,9 +6,7 @@
     "ul-indent": {
         "indent": 4
     },
-    "line-length": {
-        "tables": false
-    },
+    "line-length": false,
     "commands-show-output": false,
     "no-duplicate-heading": {
         "siblings_only": true
