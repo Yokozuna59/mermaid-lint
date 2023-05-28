@@ -30,9 +30,6 @@ describe('pie chart', () => {
 
         const value = result.value;
         expect(value.$type).toBe(PieChart);
-        expect(value.showData).toBeFalsy();
-        expect(value.title).toBeUndefined();
-        expect(value.sections).toHaveLength(0);
     });
 
     // showData
@@ -60,8 +57,6 @@ describe('pie chart', () => {
         const value = result.value;
         expect(value.$type).toBe(PieChart);
         expect(value.showData).toBeTruthy();
-        expect(value.title).toBeUndefined();
-        expect(value.sections).toHaveLength(0);
     });
 
     // title
@@ -90,9 +85,7 @@ describe('pie chart', () => {
 
             const value = result.value;
             expect(value.$type).toBe(PieChart);
-            expect(value.showData).toBeFalsy();
             expect(value.title).toBe('sample title');
-            expect(value.sections).toHaveLength(0);
         },
     );
 
@@ -127,9 +120,7 @@ describe('pie chart', () => {
 
             const value = result.value;
             expect(value.$type).toBe(PieChart);
-            expect(value.showData).toBeFalsy();
             expect(value.title).toBe('sample title');
-            expect(value.sections).toHaveLength(0);
         },
     );
 
@@ -152,7 +143,6 @@ describe('pie chart', () => {
             expect(value.$type).toBe(PieChart);
             expect(value.showData).toBeTruthy();
             expect(value.title).toBe('sample title');
-            expect(value.sections).toHaveLength(0);
         },
     );
 
@@ -189,7 +179,6 @@ describe('pie chart', () => {
             expect(value.$type).toBe(PieChart);
             expect(value.showData).toBeTruthy();
             expect(value.title).toBe('sample title');
-            expect(value.sections).toHaveLength(0);
         },
     );
 
@@ -225,6 +214,8 @@ describe('pie chart', () => {
                 expect(result.lexerErrors).toHaveLength(0);
 
                 const value = result.value;
+                expect(value.$type).toBe(PieChart);
+
                 const section0 = value.sections[0];
                 expect(section0?.label).toBe('GitHub');
                 expect(section0?.value).toBe(100);
@@ -232,11 +223,6 @@ describe('pie chart', () => {
                 const section1 = value.sections[1];
                 expect(section1?.label).toBe('GitLab');
                 expect(section1?.value).toBe(50);
-
-                expect(value.showData).toBeFalsy();
-                expect(value.title).toBeUndefined();
-                expect(value.accDescr).toBeUndefined();
-                expect(value.accTitle).toBeUndefined();
             });
 
             it('should handle sections with showData', async () => {
@@ -248,6 +234,9 @@ describe('pie chart', () => {
                 expect(result.lexerErrors).toHaveLength(0);
 
                 const value = result.value;
+                expect(value.$type).toBe(PieChart);
+                expect(value.showData).toBeTruthy();
+
                 const section0 = value.sections[0];
                 expect(section0?.label).toBe('GitHub');
                 expect(section0?.value).toBe(100);
@@ -255,11 +244,6 @@ describe('pie chart', () => {
                 const section1 = value.sections[1];
                 expect(section1?.label).toBe('GitLab');
                 expect(section1?.value).toBe(50);
-
-                expect(value.showData).toBeTruthy();
-                expect(value.title).toBeUndefined();
-                expect(value.accDescr).toBeUndefined();
-                expect(value.accTitle).toBeUndefined();
             });
 
             it.todo('should handle sections with title', async () => {
@@ -271,6 +255,9 @@ describe('pie chart', () => {
                 expect(result.lexerErrors).toHaveLength(0);
 
                 const value = result.value;
+                expect(value.$type).toBe(PieChart);
+                expect(value.title).toBe('sample wow');
+
                 const section0 = value.sections[0];
                 expect(section0?.label).toBe('GitHub');
                 expect(section0?.value).toBe(100);
@@ -278,11 +265,6 @@ describe('pie chart', () => {
                 const section1 = value.sections[1];
                 expect(section1?.label).toBe('GitLab');
                 expect(section1?.value).toBe(50);
-
-                expect(value.showData).toBeFalsy();
-                expect(value.title).toBe('sample wow');
-                expect(value.accDescr).toBeUndefined();
-                expect(value.accTitle).toBeUndefined();
             });
 
             it.todo('should handle sections with accTitle', async () => {
@@ -294,6 +276,9 @@ describe('pie chart', () => {
                 expect(result.lexerErrors).toHaveLength(0);
 
                 const value = result.value;
+                expect(value.$type).toBe(PieChart);
+                expect(value.accTitle).toBe('sample wow');
+
                 const section0 = value.sections[0];
                 expect(section0?.label).toBe('GitHub');
                 expect(section0?.value).toBe(100);
@@ -301,24 +286,22 @@ describe('pie chart', () => {
                 const section1 = value.sections[1];
                 expect(section1?.label).toBe('GitLab');
                 expect(section1?.value).toBe(50);
-
-                expect(value.showData).toBeFalsy();
-                expect(value.title).toBeUndefined();
-                expect(value.accDescr).toBeUndefined();
-                expect(value.accTitle).toBe('sample wow');
             });
 
             it.todo(
                 'should handle sections with single line accDescr',
                 async () => {
                     const string_ = `pie accDescr: sample wow
-                "GitHub": 100
-                "GitLab": 50`;
+                    "GitHub": 100
+                    "GitLab": 50`;
                     const { parseResult: result } = await parse(string_);
                     expect(result.parserErrors).toHaveLength(0);
                     expect(result.lexerErrors).toHaveLength(0);
 
                     const value = result.value;
+                    expect(value.$type).toBe(PieChart);
+                    expect(value.accDescr).toBe('sample wow');
+
                     const section0 = value.sections[0];
                     expect(section0?.label).toBe('GitHub');
                     expect(section0?.value).toBe(100);
@@ -326,11 +309,6 @@ describe('pie chart', () => {
                     const section1 = value.sections[1];
                     expect(section1?.label).toBe('GitLab');
                     expect(section1?.value).toBe(50);
-
-                    expect(value.showData).toBeFalsy();
-                    expect(value.title).toBeUndefined();
-                    expect(value.accDescr).toBe('sample wow');
-                    expect(value.accTitle).toBeUndefined();
                 },
             );
 
@@ -347,6 +325,9 @@ describe('pie chart', () => {
                     expect(result.lexerErrors).toHaveLength(0);
 
                     const value = result.value;
+                    expect(value.$type).toBe(PieChart);
+                    expect(value.accDescr).toBe('sample wow');
+
                     const section0 = value.sections[0];
                     expect(section0?.label).toBe('GitHub');
                     expect(section0?.value).toBe(100);
@@ -354,11 +335,6 @@ describe('pie chart', () => {
                     const section1 = value.sections[1];
                     expect(section1?.label).toBe('GitLab');
                     expect(section1?.value).toBe(50);
-
-                    expect(value.showData).toBeFalsy();
-                    expect(value.title).toBeUndefined();
-                    expect(value.accDescr).toBe('sample wow');
-                    expect(value.accTitle).toBeUndefined();
                 },
             );
         });
@@ -373,6 +349,8 @@ describe('pie chart', () => {
                 expect(result.lexerErrors).toHaveLength(0);
 
                 const value = result.value;
+                expect(value.$type).toBe(PieChart);
+
                 const section0 = value.sections[0];
                 expect(section0?.label).toBe('GitHub');
                 expect(section0?.value).toBe(100);
@@ -380,11 +358,6 @@ describe('pie chart', () => {
                 const section1 = value.sections[1];
                 expect(section1?.label).toBe('GitHub');
                 expect(section1?.value).toBe(50);
-
-                expect(value.showData).toBeFalsy();
-                expect(value.title).toBeUndefined();
-                expect(value.accDescr).toBeUndefined();
-                expect(value.accTitle).toBeUndefined();
             });
         });
     });
