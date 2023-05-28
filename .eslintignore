@@ -3,3 +3,6 @@ coverage/
 
 # langium generated ast
 generated/
+
+# tsc build
+dist/
