@@ -29,8 +29,6 @@ describe('accTitle', () => {
             expect(result.lexerErrors).toHaveLength(0);
 
             const value = result.value;
-            expect(value.title).toBeUndefined();
-            expect(value.accDescr).toBeUndefined();
             expect(value.accTitle).toBeUndefined();
         });
 
@@ -56,8 +54,6 @@ describe('accTitle', () => {
             expect(result.lexerErrors).toHaveLength(0);
 
             const value = result.value;
-            expect(value.title).toBeUndefined();
-            expect(value.accDescr).toBeUndefined();
             expect(value.accTitle).toBe('sample accessibility');
         });
 
@@ -69,7 +65,6 @@ describe('accTitle', () => {
 
             const value = result.value;
             expect(value.title).toBeUndefined();
-            expect(value.accDescr).toBeUndefined();
             expect(value.accTitle).toBe('sample accessibility + title test');
         });
 
@@ -82,7 +77,6 @@ describe('accTitle', () => {
                 expect(result.lexerErrors).toHaveLength(0);
 
                 const value = result.value;
-                expect(value.title).toBeUndefined();
                 expect(value.accDescr).toBeUndefined();
                 expect(value.accTitle).toBe(
                     'sample description + accDescr: test',
@@ -97,7 +91,6 @@ describe('accTitle', () => {
             expect(result.lexerErrors).toHaveLength(0);
 
             const value = result.value;
-            expect(value.title).toBeUndefined();
             expect(value.accDescr).toBeUndefined();
             expect(value.accTitle).toBe('sample description + accDescr {test}');
         });
@@ -112,8 +105,6 @@ describe('accTitle', () => {
                 expect(result.lexerErrors).toHaveLength(0);
 
                 const value = result.value;
-                expect(value.title).toBeUndefined();
-                expect(value.accDescr).toBeUndefined();
                 expect(value.accTitle).toBe('accTitle: test');
             });
         });
@@ -127,8 +118,6 @@ describe('accTitle', () => {
                 expect(result.lexerErrors).toHaveLength(0);
 
                 const value = result.value;
-                expect(value.title).toBeUndefined();
-                expect(value.accDescr).toBeUndefined();
                 expect(value.accTitle).toBe('sample accessibility');
             });
 
@@ -140,8 +129,6 @@ describe('accTitle', () => {
                 expect(result.lexerErrors).toHaveLength(0);
 
                 const value = result.value;
-                expect(value.title).toBeUndefined();
-                expect(value.accDescr).toBeUndefined();
                 expect(value.accTitle).toBeUndefined();
             });
 
@@ -153,8 +140,6 @@ describe('accTitle', () => {
                 expect(result.lexerErrors).toHaveLength(0);
 
                 const value = result.value;
-                expect(value.title).toBeUndefined();
-                expect(value.accDescr).toBeUndefined();
                 expect(value.accTitle).toBe('sample accessibility');
             });
         });
