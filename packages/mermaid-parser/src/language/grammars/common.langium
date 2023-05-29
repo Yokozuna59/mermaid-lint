@@ -17,6 +17,6 @@ terminal TITLE: /title/;
 
 terminal NEWLINE: /[\n\r]/;
 terminal STRING: /"[^"]*"/;
-terminal NUMBER returns number: /(0|[1-9][0-9]*)(\.[1-9]+)?/;
+terminal NUMBER returns number: /(0|[1-9][0-9]*)(\.[0-9]+)?/;
 
 hidden terminal WHITESPACES: /\s/;

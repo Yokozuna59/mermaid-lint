@@ -329,7 +329,7 @@ export const MermaidGrammar = (): Grammar => loadedMermaidGrammar ?? (loadedMerm
       },
       "definition": {
         "$type": "RegexToken",
-        "regex": "(0|[1-9][0-9]*)(\\\\.[1-9]+)?"
+        "regex": "(0|[1-9][0-9]*)(\\\\.[0-9]+)?"
       },
       "fragment": false,
       "hidden": false
