@@ -4,4 +4,8 @@
 # requires git > 2.23.0
 # see <https://git-scm.com/docs/git-blame#Documentation/git-blame.txt---ignore-revs-fileltfilegt>
 
+# chore: rename `language-server` to `language` (#30)
 b8a245ecbe6dff80aeb516f68d9f6815706910bd
+
+# chore: move `mermaid.langium` into `grammar` dir (#90)
+fa0d65cd501ab3f0d300b0d87fc213e9e180b8d2
