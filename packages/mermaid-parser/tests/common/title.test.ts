@@ -15,7 +15,7 @@ describe('title', () => {
             `pie   title   `,
 
             // with tabs
-            `pie\title\t`,
+            `pie\ttitle\t`,
 
             // with extra whitespaces
             `pie
