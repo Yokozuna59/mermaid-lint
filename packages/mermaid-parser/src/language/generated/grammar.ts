@@ -39,7 +39,7 @@ export const MermaidGrammar = (): Grammar => loadedMermaidGrammar ?? (loadedMerm
           {
             "$type": "RuleCall",
             "rule": {
-              "$ref": "#/rules@10"
+              "$ref": "#/rules@11"
             },
             "arguments": [],
             "cardinality": "*"
@@ -61,7 +61,7 @@ export const MermaidGrammar = (): Grammar => loadedMermaidGrammar ?? (loadedMerm
           {
             "$type": "RuleCall",
             "rule": {
-              "$ref": "#/rules@10"
+              "$ref": "#/rules@11"
             },
             "arguments": [],
             "cardinality": "*"
@@ -83,7 +83,7 @@ export const MermaidGrammar = (): Grammar => loadedMermaidGrammar ?? (loadedMerm
                   {
                     "$type": "RuleCall",
                     "rule": {
-                      "$ref": "#/rules@10"
+                      "$ref": "#/rules@11"
                     },
                     "arguments": [],
                     "cardinality": "+"
@@ -106,7 +106,7 @@ export const MermaidGrammar = (): Grammar => loadedMermaidGrammar ?? (loadedMerm
               {
                 "$type": "RuleCall",
                 "rule": {
-                  "$ref": "#/rules@10"
+                  "$ref": "#/rules@11"
                 },
                 "arguments": [],
                 "cardinality": "*"
@@ -151,7 +151,7 @@ export const MermaidGrammar = (): Grammar => loadedMermaidGrammar ?? (loadedMerm
             "terminal": {
               "$type": "RuleCall",
               "rule": {
-                "$ref": "#/rules@11"
+                "$ref": "#/rules@13"
               },
               "arguments": []
             }
@@ -170,52 +170,75 @@ export const MermaidGrammar = (): Grammar => loadedMermaidGrammar ?? (loadedMerm
       "name": "TITLE_AND_ACCESSIBILITIES",
       "fragment": true,
       "definition": {
-        "$type": "Alternatives",
+        "$type": "Group",
         "elements": [
           {
-            "$type": "Assignment",
-            "feature": "accDescr",
-            "operator": "=",
-            "terminal": {
-              "$type": "RuleCall",
-              "rule": {
-                "$ref": "#/rules@7"
+            "$type": "Alternatives",
+            "elements": [
+              {
+                "$type": "Assignment",
+                "feature": "accDescr",
+                "operator": "=",
+                "terminal": {
+                  "$type": "RuleCall",
+                  "rule": {
+                    "$ref": "#/rules@8"
+                  },
+                  "arguments": []
+                }
               },
-              "arguments": []
-            }
+              {
+                "$type": "Assignment",
+                "feature": "accTitle",
+                "operator": "=",
+                "terminal": {
+                  "$type": "RuleCall",
+                  "rule": {
+                    "$ref": "#/rules@9"
+                  },
+                  "arguments": []
+                }
+              },
+              {
+                "$type": "Assignment",
+                "feature": "title",
+                "operator": "=",
+                "terminal": {
+                  "$type": "RuleCall",
+                  "rule": {
+                    "$ref": "#/rules@10"
+                  },
+                  "arguments": []
+                }
+              }
+            ],
+            "cardinality": "+"
           },
           {
-            "$type": "Assignment",
-            "feature": "accTitle",
-            "operator": "=",
-            "terminal": {
-              "$type": "RuleCall",
-              "rule": {
-                "$ref": "#/rules@8"
-              },
-              "arguments": []
-            }
-          },
-          {
-            "$type": "Assignment",
-            "feature": "title",
-            "operator": "=",
-            "terminal": {
-              "$type": "RuleCall",
-              "rule": {
-                "$ref": "#/rules@9"
-              },
-              "arguments": []
-            }
+            "$type": "RuleCall",
+            "rule": {
+              "$ref": "#/rules@11"
+            },
+            "arguments": [],
+            "cardinality": "*"
           }
-        ],
-        "cardinality": "+"
+        ]
       },
       "definesHiddenTokens": false,
       "entry": false,
       "hiddenTokens": [],
       "parameters": [],
       "wildcard": false
+    },
+    {
+      "$type": "TerminalRule",
+      "hidden": true,
+      "name": "WHITESPACE",
+      "definition": {
+        "$type": "RegexToken",
+        "regex": "[\\\\t\\\\r ]+"
+      },
+      "fragment": false
     },
     {
       "$type": "TerminalRule",
@@ -282,21 +305,7 @@ export const MermaidGrammar = (): Grammar => loadedMermaidGrammar ?? (loadedMerm
       "name": "NEWLINE",
       "definition": {
         "$type": "RegexToken",
-        "regex": "\\\\n"
-      },
-      "fragment": false,
-      "hidden": false
-    },
-    {
-      "$type": "TerminalRule",
-      "name": "NUMBER",
-      "type": {
-        "$type": "ReturnType",
-        "name": "number"
-      },
-      "definition": {
-        "$type": "RegexToken",
-        "regex": "[0-9]+(\\\\.[0-9]+)?"
+        "regex": "[\\\\n\\\\r]"
       },
       "fragment": false,
       "hidden": false
@@ -313,13 +322,17 @@ export const MermaidGrammar = (): Grammar => loadedMermaidGrammar ?? (loadedMerm
     },
     {
       "$type": "TerminalRule",
-      "hidden": true,
-      "name": "WHITESPACE",
+      "name": "NUMBER",
+      "type": {
+        "$type": "ReturnType",
+        "name": "number"
+      },
       "definition": {
         "$type": "RegexToken",
-        "regex": "[ \\\\r\\\\t]+"
+        "regex": "(0|[1-9][0-9]*)(\\\\.[1-9]+)?"
       },
-      "fragment": false
+      "fragment": false,
+      "hidden": false
     },
     {
       "$type": "TerminalRule",

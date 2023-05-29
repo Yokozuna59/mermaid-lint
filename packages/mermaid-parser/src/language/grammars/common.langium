@@ -1,22 +1,22 @@
 /* fragments */
 fragment TITLE_AND_ACCESSIBILITIES:
     (accDescr=ACC_DESCR | accTitle=ACC_TITLE | title=TITLE)+
+    NEWLINE*
 ;
 
 /* terminals */
+hidden terminal WHITESPACE: /[\t\r ]+/;
+
 hidden terminal DIRECTIVE: /%%({[\w\W]*})%%\s*(?!.)/;
 hidden terminal COMMENT: /%%.*\s*/;
 hidden terminal YAML: /---\s*?[\n\r](.|\n)*---\s*(?!.)/;
 
-// placeholder terminals
 terminal ACC_DESCR: /accDescr/;
 terminal ACC_TITLE: /accTitle/;
 terminal TITLE: /title/;
 
-terminal NEWLINE: /\n/;
-terminal NUMBER returns number: /[0-9]+(\.[0-9]+)?/;
+terminal NEWLINE: /[\n\r]/;
 terminal STRING: /"[^"]*"/;
+terminal NUMBER returns number: /(0|[1-9][0-9]*)(\.[1-9]+)?/;
 
-// hidden terminals
-hidden terminal WHITESPACE: /[ \r\t]+/;
 hidden terminal WHITESPACES: /\s/;
