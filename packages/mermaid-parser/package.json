@@ -17,9 +17,10 @@
         "dist/"
     ],
     "scripts": {
-        "build": "tsc",
+        "build": "pnpm langium:generate && tsc",
         "clean": "rimraf dist",
-        "langium:generate": "langium generate"
+        "langium:generate": "langium generate",
+        "langium:watch": "langium generate --watch"
     },
     "keywords": [
         "mermaid",
