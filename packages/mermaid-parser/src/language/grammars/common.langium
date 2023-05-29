@@ -4,6 +4,10 @@ fragment TITLE_AND_ACCESSIBILITIES:
 ;
 
 /* terminals */
+hidden terminal DIRECTIVE: /%%({[\w\W]*})%%\s*(?!.)/;
+hidden terminal COMMENT: /%%.*\s*/;
+hidden terminal YAML: /---\s*?[\n\r](.|\n)*---\s*(?!.)/;
+
 // placeholder terminals
 terminal ACC_DESCR: /accDescr/;
 terminal ACC_TITLE: /accTitle/;
@@ -16,6 +20,3 @@ terminal STRING: /"[^"]*"/;
 // hidden terminals
 hidden terminal WHITESPACE: /[ \r\t]+/;
 hidden terminal WHITESPACES: /\s/;
-hidden terminal DIRECTIVE: "%%{" -> "}%%\n";
-hidden terminal COMMENT: /%%.*/;
-hidden terminal YAML: "---\n" -> "---\n";
