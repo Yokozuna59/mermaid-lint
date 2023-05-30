@@ -6,18 +6,12 @@ import {
     matchAccessibilityDescr,
     matchAccessibilityTitle,
     matchTitle,
-    removeWhitespaces,
 } from './matchers';
 
 export class MermiadTokenBuilder extends DefaultTokenBuilder {
     override buildTerminalToken(terminal: TerminalRule): TokenType {
         const tokenType = super.buildTerminalToken(terminal);
         switch (tokenType.name) {
-            case 'WHITESPACES': {
-                tokenType.LINE_BREAKS = true;
-                tokenType.PATTERN = removeWhitespaces;
-                break;
-            }
             case 'ACC_DESCR': {
                 tokenType.LINE_BREAKS = true;
                 tokenType.PATTERN = matchAccessibilityDescr;
