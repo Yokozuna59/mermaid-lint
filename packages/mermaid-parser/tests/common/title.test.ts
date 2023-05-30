@@ -57,7 +57,7 @@ describe('title', () => {
             expect(value.title).toBe('sample');
         });
 
-        it.todo('should handle title with accTitle', async () => {
+        it('should handle title with accTitle', async () => {
             const string_ = `pie title sample + accTitle: test`;
             const { parseResult: result } = await parse(string_);
             expect(result.parserErrors).toHaveLength(0);
@@ -68,7 +68,7 @@ describe('title', () => {
             expect(value.accTitle).toBeUndefined();
         });
 
-        it.todo('should handle title with single line accDescr', async () => {
+        it('should handle title with single line accDescr', async () => {
             const string_ = `pie title sample + accDescr: test`;
             const { parseResult: result } = await parse(string_);
             expect(result.parserErrors).toHaveLength(0);
@@ -79,7 +79,7 @@ describe('title', () => {
             expect(value.accDescr).toBeUndefined();
         });
 
-        it.todo('should handle title with multi line accDescr', async () => {
+        it('should handle title with multi line accDescr', async () => {
             const string_ = `pie title sample + accDescr {test}`;
             const { parseResult: result } = await parse(string_);
             expect(result.parserErrors).toHaveLength(0);
