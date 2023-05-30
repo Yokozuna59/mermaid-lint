@@ -5,6 +5,7 @@ fragment TITLE_AND_ACCESSIBILITIES:
 ;
 
 /* terminals */
+terminal NEWLINE: /[\n\r]/;
 hidden terminal WHITESPACE: /[\t\r ]+/;
 
 hidden terminal DIRECTIVE: /%%({[\w\W]*})%%\s*(?!.)/;
@@ -15,8 +16,5 @@ terminal ACC_DESCR: /accDescr/;
 terminal ACC_TITLE: /accTitle/;
 terminal TITLE: /title/;
 
-terminal NEWLINE: /[\n\r]/;
 terminal STRING: /"[^"]*"/;
 terminal NUMBER returns number: /(0|[1-9][0-9]*)(\.[0-9]+)?/;
-
-hidden terminal WHITESPACES: /\s/;

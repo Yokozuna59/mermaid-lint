@@ -39,7 +39,7 @@ export const MermaidGrammar = (): Grammar => loadedMermaidGrammar ?? (loadedMerm
           {
             "$type": "RuleCall",
             "rule": {
-              "$ref": "#/rules@11"
+              "$ref": "#/rules@4"
             },
             "arguments": [],
             "cardinality": "*"
@@ -61,7 +61,7 @@ export const MermaidGrammar = (): Grammar => loadedMermaidGrammar ?? (loadedMerm
           {
             "$type": "RuleCall",
             "rule": {
-              "$ref": "#/rules@11"
+              "$ref": "#/rules@4"
             },
             "arguments": [],
             "cardinality": "*"
@@ -83,7 +83,7 @@ export const MermaidGrammar = (): Grammar => loadedMermaidGrammar ?? (loadedMerm
                   {
                     "$type": "RuleCall",
                     "rule": {
-                      "$ref": "#/rules@11"
+                      "$ref": "#/rules@4"
                     },
                     "arguments": [],
                     "cardinality": "+"
@@ -106,7 +106,7 @@ export const MermaidGrammar = (): Grammar => loadedMermaidGrammar ?? (loadedMerm
               {
                 "$type": "RuleCall",
                 "rule": {
-                  "$ref": "#/rules@11"
+                  "$ref": "#/rules@4"
                 },
                 "arguments": [],
                 "cardinality": "*"
@@ -182,7 +182,7 @@ export const MermaidGrammar = (): Grammar => loadedMermaidGrammar ?? (loadedMerm
                 "terminal": {
                   "$type": "RuleCall",
                   "rule": {
-                    "$ref": "#/rules@8"
+                    "$ref": "#/rules@9"
                   },
                   "arguments": []
                 }
@@ -194,7 +194,7 @@ export const MermaidGrammar = (): Grammar => loadedMermaidGrammar ?? (loadedMerm
                 "terminal": {
                   "$type": "RuleCall",
                   "rule": {
-                    "$ref": "#/rules@9"
+                    "$ref": "#/rules@10"
                   },
                   "arguments": []
                 }
@@ -206,7 +206,7 @@ export const MermaidGrammar = (): Grammar => loadedMermaidGrammar ?? (loadedMerm
                 "terminal": {
                   "$type": "RuleCall",
                   "rule": {
-                    "$ref": "#/rules@10"
+                    "$ref": "#/rules@11"
                   },
                   "arguments": []
                 }
@@ -217,7 +217,7 @@ export const MermaidGrammar = (): Grammar => loadedMermaidGrammar ?? (loadedMerm
           {
             "$type": "RuleCall",
             "rule": {
-              "$ref": "#/rules@11"
+              "$ref": "#/rules@4"
             },
             "arguments": [],
             "cardinality": "*"
@@ -229,6 +229,16 @@ export const MermaidGrammar = (): Grammar => loadedMermaidGrammar ?? (loadedMerm
       "hiddenTokens": [],
       "parameters": [],
       "wildcard": false
+    },
+    {
+      "$type": "TerminalRule",
+      "name": "NEWLINE",
+      "definition": {
+        "$type": "RegexToken",
+        "regex": "[\\\\n\\\\r]"
+      },
+      "fragment": false,
+      "hidden": false
     },
     {
       "$type": "TerminalRule",
@@ -302,16 +312,6 @@ export const MermaidGrammar = (): Grammar => loadedMermaidGrammar ?? (loadedMerm
     },
     {
       "$type": "TerminalRule",
-      "name": "NEWLINE",
-      "definition": {
-        "$type": "RegexToken",
-        "regex": "[\\\\n\\\\r]"
-      },
-      "fragment": false,
-      "hidden": false
-    },
-    {
-      "$type": "TerminalRule",
       "name": "STRING",
       "definition": {
         "$type": "RegexToken",
@@ -333,16 +333,6 @@ export const MermaidGrammar = (): Grammar => loadedMermaidGrammar ?? (loadedMerm
       },
       "fragment": false,
       "hidden": false
-    },
-    {
-      "$type": "TerminalRule",
-      "hidden": true,
-      "name": "WHITESPACES",
-      "definition": {
-        "$type": "RegexToken",
-        "regex": "\\\\s"
-      },
-      "fragment": false
     }
   ],
   "definesHiddenTokens": false,
