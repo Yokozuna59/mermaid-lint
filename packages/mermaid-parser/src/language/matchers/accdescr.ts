@@ -1,28 +1,35 @@
 /* eslint-disable unicorn/no-null */
 import { CustomPatternMatcherFunc } from 'chevrotain';
 
+import { CustomMatcherReturn } from '.';
+
 /**
  * Matches single and multiline accessible description
  */
 const accessibilityDescrRegex =
-    // eslint-disable-next-line regexp/strict
-    /(?:^|[\t ]+)accDescr(?:[\t ]*:[\t ]*([^\n]+)?|\s*{([^}]+)?})/;
+    // eslint-disable-next-line regexp/strict, regexp/no-super-linear-backtracking
+    /accDescr(?:[\t ]*:[\t ]*([^\n]*)|\s*{([^}]*)})/;
 export const matchAccessibilityDescr: CustomPatternMatcherFunc = (
-    string_: string,
+    text: string,
+    startOffset: number,
 ) => {
-    const match = accessibilityDescrRegex.exec(string_);
-    if (match) {
+    accessibilityDescrRegex.lastIndex = startOffset;
+    let match: CustomMatcherReturn = accessibilityDescrRegex.exec(text);
+    if (match !== null) {
         // single line description
-        if (match[1] !== undefined) {
-            return [match[1].trim()];
+        if (match[1] !== undefined && match[2] === undefined) {
+            match.payload = match[1].trim() || undefined;
         }
-
         // multi line description
-        if (match[2] !== undefined) {
-            const result = match[2].replaceAll(/^\s*|\s+$/gm, '');
-            return result ? [result] : null;
+        else if (match[2] !== undefined && match[1] === undefined) {
+            const result = match[2]
+                .replaceAll(/^\s*/gm, '')
+                .replaceAll(/\s+$/gm, '');
+            match.payload = result || undefined;
+        } else {
+            match = null;
         }
     }
-    return null;
+    return match;
 };
 /* eslint-enable unicorn/no-null */

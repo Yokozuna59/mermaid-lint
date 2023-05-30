@@ -1,23 +1,23 @@
 /* eslint-disable unicorn/no-null */
-import {
-    CustomPatternMatcherFunc,
-    CustomPatternMatcherReturn,
-} from 'chevrotain';
+import { CustomPatternMatcherFunc } from 'chevrotain';
+
+import { CustomMatcherReturn } from '.';
 
 /**
  * Matches a single accessible title
  */
-const accessibilityTitleRegex = /(?:^|[\t ]+)accTitle[\t ]*:[\t ]*([^\n]+)?/;
+const accessibilityTitleRegex = /accTitle[\t ]*:[\t ]*([^\n]*)/;
 export const matchAccessibilityTitle: CustomPatternMatcherFunc = (
-    string_: string,
+    text: string,
+    startOffset: number,
 ) => {
-    let result: CustomPatternMatcherReturn | null = null;
-    let match = accessibilityTitleRegex.exec(string_);
-    while (match !== null) {
-        result = match[1] === undefined ? null : [match[1].trim()];
-        string_ = string_.replace(match[0], '');
-        match = accessibilityTitleRegex.exec(string_);
+    accessibilityTitleRegex.lastIndex = startOffset;
+    let match: CustomMatcherReturn = accessibilityTitleRegex.exec(text);
+    if (match !== null && match[1] !== undefined) {
+        match.payload = match[1].trim() || undefined;
+    } else {
+        match = null;
     }
-    return result;
+    return match;
 };
 /* eslint-enable unicorn/no-null */
