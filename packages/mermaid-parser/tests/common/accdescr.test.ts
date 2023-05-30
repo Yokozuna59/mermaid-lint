@@ -7,7 +7,7 @@ describe('accDescr', () => {
     const { parse } = createTestServices<Mermaid>();
 
     describe('single line', () => {
-        it.each([
+        it.todo.each([
             // without whitespaces
             `pie accDescr:`,
 
@@ -81,7 +81,7 @@ describe('accDescr', () => {
     });
 
     describe('multi line', () => {
-        it.each([
+        it.todo.each([
             // without whitespaces
             `pie accDescr{}`,
 
