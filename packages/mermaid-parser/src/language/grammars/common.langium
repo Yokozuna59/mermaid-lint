@@ -9,10 +9,10 @@ terminal NEWLINE: /[\n\r]/;
 hidden terminal WHITESPACE: /[\t\r ]+/;
 
 // TODO: add YAML_COMMENT hidden rule
-hidden terminal YAML: /---\s*[\n\r](.|\n)*---\s*(?!.)/;
-hidden terminal MULTI_LINE_COMMENT: /%%\*(.|\n)*\*%%/;
-hidden terminal SINGLE_LINE_COMMENT: /%%.*/;
-hidden terminal DIRECTIVE: /%%({(.|\n)*})%%\s*(?!.)/;
+hidden terminal YAML: /---\s*[\n\r][\s\S]*?---\s*(?!.)/;
+hidden terminal MULTI_LINE_COMMENT: /%%\*[\s\S]*?\*%%\s*/;
+hidden terminal DIRECTIVE: /%%{[\s\S]*?}%%\s*/;
+hidden terminal SINGLE_LINE_COMMENT: /%%[^\n\r]*\s*/;
 
 terminal ACC_DESCR: /accDescr/;
 terminal ACC_TITLE: /accTitle/;
