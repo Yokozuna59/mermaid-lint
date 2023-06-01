@@ -3,7 +3,7 @@ import "./common";
 
 entry PieChart:
     NEWLINE*
-    "pie" (showData?="showData")? NEWLINE*
+    PIE (showData?=SHOWDATA)? NEWLINE*
     TITLE_AND_ACCESSIBILITIES?
     ((NEWLINE+ sections+=Section)+ NEWLINE*)?
 ;
@@ -11,3 +11,6 @@ entry PieChart:
 Section:
     label=STRING ":" value=NUMBER
 ;
+
+terminal PIE: /pie(?!\S)/;
+terminal SHOWDATA: /showData(?!\S)/;
