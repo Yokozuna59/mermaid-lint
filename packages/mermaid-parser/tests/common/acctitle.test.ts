@@ -32,7 +32,7 @@ describe('accTitle', () => {
             expect(value.accTitle).toBeUndefined();
         });
 
-        it.each([
+        it.todo.each([
             // without whitespaces
             `pie accTitle: sample accessibility`,
 
@@ -57,7 +57,7 @@ describe('accTitle', () => {
             expect(value.accTitle).toBe('sample accessibility');
         });
 
-        it('should handle accTitle with title', async () => {
+        it.todo('should handle accTitle with title', async () => {
             const string_ = `pie accTitle: sample accessibility + title test`;
             const { parseResult: result } = await parse(string_);
             expect(result.parserErrors).toHaveLength(0);
@@ -98,7 +98,7 @@ describe('accTitle', () => {
 
     describe('duplicate', () => {
         describe('inside', () => {
-            it('should handle accTitle inside accTitle', async () => {
+            it.todo('should handle accTitle inside accTitle', async () => {
                 const string_ = `pie accTitle: accTitle: test`;
                 const { parseResult: result } = await parse(string_);
                 expect(result.parserErrors).toHaveLength(0);

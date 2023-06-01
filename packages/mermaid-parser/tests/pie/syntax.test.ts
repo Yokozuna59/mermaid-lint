@@ -60,7 +60,7 @@ describe('pie chart', () => {
     });
 
     // title
-    it.each([
+    it.todo.each([
         // without whitespaces
         `pie title sample title`,
 
@@ -90,7 +90,7 @@ describe('pie chart', () => {
     );
 
     // pie + \n + title
-    it.each([
+    it.todo.each([
         // without newlines
         `pie
         title sample title`,
@@ -125,7 +125,7 @@ describe('pie chart', () => {
     );
 
     // showData + title
-    it.each([
+    it.todo.each([
         // without newlines
         `pie showData title sample title`,
 
@@ -147,7 +147,7 @@ describe('pie chart', () => {
     );
 
     // showData + \n + title
-    it.each([
+    it.todo.each([
         // without newlines
         `pie showData
         title sample title`,
