@@ -8,9 +8,11 @@ fragment TITLE_AND_ACCESSIBILITIES:
 terminal NEWLINE: /[\n\r]/;
 hidden terminal WHITESPACE: /[\t\r ]+/;
 
-hidden terminal DIRECTIVE: /%%({[\w\W]*})%%\s*(?!.)/;
-hidden terminal COMMENT: /%%.*\s*/;
-hidden terminal YAML: /---\s*?[\n\r](.|\n)*---\s*(?!.)/;
+// TODO: add YAML_COMMENT hidden rule
+hidden terminal YAML: /---\s*[\n\r](.|\n)*---\s*(?!.)/;
+hidden terminal MULTI_LINE_COMMENT: /%%\*(.|\n)*\*%%/;
+hidden terminal SINGLE_LINE_COMMENT: /%%.*/;
+hidden terminal DIRECTIVE: /%%({(.|\n)*})%%\s*(?!.)/;
 
 terminal ACC_DESCR: /accDescr/;
 terminal ACC_TITLE: /accTitle/;
