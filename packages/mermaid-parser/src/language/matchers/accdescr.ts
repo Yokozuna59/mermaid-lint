@@ -8,7 +8,7 @@ import { CustomMatcherReturn } from '.';
  */
 const accessibilityDescrRegex =
     // eslint-disable-next-line regexp/strict, regexp/no-super-linear-backtracking
-    /accDescr(?:[\t ]*:[\t ]*([^\n]*)|\s*{([^}]*)})/;
+    /accDescr(?:[\t ]*:[\t ]*([^\n\r]*)|\s*{([^}]*)})/;
 export const matchAccessibilityDescr: CustomPatternMatcherFunc = (
     text: string,
     startOffset: number,

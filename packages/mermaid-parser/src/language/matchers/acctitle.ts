@@ -6,7 +6,7 @@ import { CustomMatcherReturn } from '.';
 /**
  * Matches a single accessible title
  */
-const accessibilityTitleRegex = /accTitle[\t ]*:[\t ]*([^\n]*)/;
+const accessibilityTitleRegex = /accTitle[\t ]*:[\t ]*([^\n\r]*)/;
 export const matchAccessibilityTitle: CustomPatternMatcherFunc = (
     text: string,
     startOffset: number,

@@ -6,7 +6,7 @@ import { CustomMatcherReturn } from '.';
 /**
  * Matches a single title
  */
-const titleRegex = /title(?:[\t ]+([^\n]*)|$)/;
+const titleRegex = /title(?:[\t ]+([^\n\r]*)|$)/;
 export const matchTitle: CustomPatternMatcherFunc = (
     text: string,
     startOffset: number,
