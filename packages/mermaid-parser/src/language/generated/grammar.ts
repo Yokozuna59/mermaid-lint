@@ -135,7 +135,7 @@ export const MermaidGrammar = (): Grammar => loadedMermaidGrammar ?? (loadedMerm
             "terminal": {
               "$type": "RuleCall",
               "rule": {
-                "$ref": "#/rules@12"
+                "$ref": "#/rules@13"
               },
               "arguments": []
             }
@@ -151,7 +151,7 @@ export const MermaidGrammar = (): Grammar => loadedMermaidGrammar ?? (loadedMerm
             "terminal": {
               "$type": "RuleCall",
               "rule": {
-                "$ref": "#/rules@13"
+                "$ref": "#/rules@14"
               },
               "arguments": []
             }
@@ -182,7 +182,7 @@ export const MermaidGrammar = (): Grammar => loadedMermaidGrammar ?? (loadedMerm
                 "terminal": {
                   "$type": "RuleCall",
                   "rule": {
-                    "$ref": "#/rules@9"
+                    "$ref": "#/rules@10"
                   },
                   "arguments": []
                 }
@@ -194,7 +194,7 @@ export const MermaidGrammar = (): Grammar => loadedMermaidGrammar ?? (loadedMerm
                 "terminal": {
                   "$type": "RuleCall",
                   "rule": {
-                    "$ref": "#/rules@10"
+                    "$ref": "#/rules@11"
                   },
                   "arguments": []
                 }
@@ -206,7 +206,7 @@ export const MermaidGrammar = (): Grammar => loadedMermaidGrammar ?? (loadedMerm
                 "terminal": {
                   "$type": "RuleCall",
                   "rule": {
-                    "$ref": "#/rules@11"
+                    "$ref": "#/rules@12"
                   },
                   "arguments": []
                 }
@@ -253,30 +253,40 @@ export const MermaidGrammar = (): Grammar => loadedMermaidGrammar ?? (loadedMerm
     {
       "$type": "TerminalRule",
       "hidden": true,
-      "name": "DIRECTIVE",
-      "definition": {
-        "$type": "RegexToken",
-        "regex": "%%({[\\\\w\\\\W]*})%%\\\\s*(?!.)"
-      },
-      "fragment": false
-    },
-    {
-      "$type": "TerminalRule",
-      "hidden": true,
-      "name": "COMMENT",
-      "definition": {
-        "$type": "RegexToken",
-        "regex": "%%.*\\\\s*"
-      },
-      "fragment": false
-    },
-    {
-      "$type": "TerminalRule",
-      "hidden": true,
       "name": "YAML",
       "definition": {
         "$type": "RegexToken",
-        "regex": "---\\\\s*?[\\\\n\\\\r](.|\\\\n)*---\\\\s*(?!.)"
+        "regex": "---\\\\s*[\\\\n\\\\r](.|\\\\n)*---\\\\s*(?!.)"
+      },
+      "fragment": false
+    },
+    {
+      "$type": "TerminalRule",
+      "hidden": true,
+      "name": "MULTI_LINE_COMMENT",
+      "definition": {
+        "$type": "RegexToken",
+        "regex": "%%\\\\*(.|\\\\n)*\\\\*%%"
+      },
+      "fragment": false
+    },
+    {
+      "$type": "TerminalRule",
+      "hidden": true,
+      "name": "SINGLE_LINE_COMMENT",
+      "definition": {
+        "$type": "RegexToken",
+        "regex": "%%.*"
+      },
+      "fragment": false
+    },
+    {
+      "$type": "TerminalRule",
+      "hidden": true,
+      "name": "DIRECTIVE",
+      "definition": {
+        "$type": "RegexToken",
+        "regex": "%%({(.|\\\\n)*})%%\\\\s*(?!.)"
       },
       "fragment": false
     },
