@@ -3,9 +3,10 @@ import "./common";
 
 entry PieChart:
     NEWLINE*
-    PIE (showData?=SHOWDATA)? NEWLINE*
-    TITLE_AND_ACCESSIBILITIES?
-    ((NEWLINE+ sections+=Section)+ NEWLINE*)?
+    PIE (showData?=SHOWDATA)?
+    (NEWLINE* TITLE_AND_ACCESSIBILITIES)?
+    (NEWLINE+ sections+=Section)*
+    NEWLINE*
 ;
 
 Section:
