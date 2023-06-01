@@ -256,7 +256,7 @@ export const MermaidGrammar = (): Grammar => loadedMermaidGrammar ?? (loadedMerm
       "name": "YAML",
       "definition": {
         "$type": "RegexToken",
-        "regex": "---\\\\s*[\\\\n\\\\r](.|\\\\n)*---\\\\s*(?!.)"
+        "regex": "---\\\\s*[\\\\n\\\\r][\\\\s\\\\S]*?---\\\\s*(?!.)"
       },
       "fragment": false
     },
@@ -266,17 +266,7 @@ export const MermaidGrammar = (): Grammar => loadedMermaidGrammar ?? (loadedMerm
       "name": "MULTI_LINE_COMMENT",
       "definition": {
         "$type": "RegexToken",
-        "regex": "%%\\\\*(.|\\\\n)*\\\\*%%"
-      },
-      "fragment": false
-    },
-    {
-      "$type": "TerminalRule",
-      "hidden": true,
-      "name": "SINGLE_LINE_COMMENT",
-      "definition": {
-        "$type": "RegexToken",
-        "regex": "%%.*"
+        "regex": "%%\\\\*[\\\\s\\\\S]*?\\\\*%%\\\\s*"
       },
       "fragment": false
     },
@@ -286,7 +276,17 @@ export const MermaidGrammar = (): Grammar => loadedMermaidGrammar ?? (loadedMerm
       "name": "DIRECTIVE",
       "definition": {
         "$type": "RegexToken",
-        "regex": "%%({(.|\\\\n)*})%%\\\\s*(?!.)"
+        "regex": "%%{[\\\\s\\\\S]*?}%%\\\\s*"
+      },
+      "fragment": false
+    },
+    {
+      "$type": "TerminalRule",
+      "hidden": true,
+      "name": "SINGLE_LINE_COMMENT",
+      "definition": {
+        "$type": "RegexToken",
+        "regex": "%%[^\\\\n\\\\r]*\\\\s*"
       },
       "fragment": false
     },
