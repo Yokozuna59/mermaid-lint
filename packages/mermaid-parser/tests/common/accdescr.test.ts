@@ -7,7 +7,7 @@ describe('accDescr', () => {
     const { parse } = createTestServices<Mermaid>();
 
     describe('single line', () => {
-        it.todo.each([
+        it.each([
             // without whitespaces
             `pie accDescr:`,
 
@@ -32,7 +32,7 @@ describe('accDescr', () => {
             expect(value.accDescr).toBeUndefined();
         });
 
-        it.todo.each([
+        it.each([
             // without whitespaces
             `pie accDescr:sample single line description`,
 
@@ -57,7 +57,7 @@ describe('accDescr', () => {
             expect(value.accDescr).toBe('sample single line description');
         });
 
-        it.todo('should handle accDescr with title', async () => {
+        it('should handle accDescr with title', async () => {
             const string_ = `pie accDescr: sample description + title test`;
             const { parseResult: result } = await parse(string_);
             expect(result.parserErrors).toHaveLength(0);
@@ -68,7 +68,7 @@ describe('accDescr', () => {
             expect(value.accDescr).toBe('sample description + title test');
         });
 
-        it.todo('should handle accDescr with accTitle', async () => {
+        it('should handle accDescr with accTitle', async () => {
             const string_ = `pie accDescr: sample description + accTitle: test`;
             const { parseResult: result } = await parse(string_);
             expect(result.parserErrors).toHaveLength(0);
@@ -81,7 +81,7 @@ describe('accDescr', () => {
     });
 
     describe('multi line', () => {
-        it.todo.each([
+        it.each([
             // without whitespaces
             `pie accDescr{}`,
 
@@ -110,7 +110,7 @@ describe('accDescr', () => {
             expect(value.accDescr).toBeUndefined();
         });
 
-        it.todo.each([
+        it.each([
             // without whitespaces
             `pie accDescr{sample multi line description
             newline}`,
@@ -149,7 +149,7 @@ describe('accDescr', () => {
             );
         });
 
-        it.todo('should handle regular accDescr with title', async () => {
+        it('should handle regular accDescr with title', async () => {
             const string_ = `pie accDescr {
                 sample description +
                 title test
@@ -163,7 +163,7 @@ describe('accDescr', () => {
             expect(value.accDescr).toBe('sample description +\ntitle test');
         });
 
-        it.todo('should handle regular accDescr with accTitle', async () => {
+        it('should handle regular accDescr with accTitle', async () => {
             const string_ = `pie accDescr {
                 sample description +
                 accTitle: test
@@ -180,46 +180,37 @@ describe('accDescr', () => {
 
     describe('duplicate', () => {
         describe('inside', () => {
-            it.todo(
-                'should handle single line inside single line accDescr',
-                async () => {
-                    const string_ = `pie accDescr: accDescr: test`;
-                    const { parseResult: result } = await parse(string_);
-                    expect(result.parserErrors).toHaveLength(0);
-                    expect(result.lexerErrors).toHaveLength(0);
+            it('should handle single line inside single line accDescr', async () => {
+                const string_ = `pie accDescr: accDescr: test`;
+                const { parseResult: result } = await parse(string_);
+                expect(result.parserErrors).toHaveLength(0);
+                expect(result.lexerErrors).toHaveLength(0);
 
-                    const value = result.value;
-                    expect(value.accDescr).toBe('accDescr: test');
-                },
-            );
+                const value = result.value;
+                expect(value.accDescr).toBe('accDescr: test');
+            });
 
-            it.todo(
-                'should handle multi line inside single line accDescr',
-                async () => {
-                    const string_ = `pie accDescr: accDescr {test}`;
-                    const { parseResult: result } = await parse(string_);
-                    expect(result.parserErrors).toHaveLength(0);
-                    expect(result.lexerErrors).toHaveLength(0);
+            it('should handle multi line inside single line accDescr', async () => {
+                const string_ = `pie accDescr: accDescr {test}`;
+                const { parseResult: result } = await parse(string_);
+                expect(result.parserErrors).toHaveLength(0);
+                expect(result.lexerErrors).toHaveLength(0);
 
-                    const value = result.value;
-                    expect(value.accDescr).toBe('accDescr {test}');
-                },
-            );
+                const value = result.value;
+                expect(value.accDescr).toBe('accDescr {test}');
+            });
 
-            it.todo(
-                'should handle single line inside multi line accDescr',
-                async () => {
-                    const string_ = `pie accDescr {
+            it('should handle single line inside multi line accDescr', async () => {
+                const string_ = `pie accDescr {
                     accDescr: test
                 }`;
-                    const { parseResult: result } = await parse(string_);
-                    expect(result.parserErrors).toHaveLength(0);
-                    expect(result.lexerErrors).toHaveLength(0);
+                const { parseResult: result } = await parse(string_);
+                expect(result.parserErrors).toHaveLength(0);
+                expect(result.lexerErrors).toHaveLength(0);
 
-                    const value = result.value;
-                    expect(value.accDescr).toBe('accDescr: test');
-                },
-            );
+                const value = result.value;
+                expect(value.accDescr).toBe('accDescr: test');
+            });
         });
 
         describe('after', () => {
