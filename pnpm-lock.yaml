@@ -107,13 +107,13 @@ importers:
       langium:
         specifier: ^1.2.0
         version: 1.2.0
+      vscode-uri:
+        specifier: ^3.0.7
+        version: 3.0.7
     devDependencies:
       langium-cli:
         specifier: ^1.2.0
         version: 1.2.0
-      vscode-uri:
-        specifier: ^3.0.7
-        version: 3.0.7
 
 packages:
 
