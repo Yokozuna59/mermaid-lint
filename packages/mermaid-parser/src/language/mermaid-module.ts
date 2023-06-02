@@ -12,6 +12,7 @@ import {
 import {
     MermaidGeneratedModule,
     MermaidGeneratedSharedModule,
+    MermaidValueConverter,
     MermiadTokenBuilder,
 } from './index';
 import { PieChartValidator, registerValidationChecks } from './validators';
@@ -22,6 +23,7 @@ import { PieChartValidator, registerValidationChecks } from './validators';
 export type MermaidAddedServices = {
     parser: {
         TokenBuilder: MermiadTokenBuilder;
+        ValueConverter: MermaidValueConverter;
     };
     validation: {
         PieChartValidator: PieChartValidator;
@@ -43,6 +45,7 @@ export const MermaidModule: Module<
 > = {
     parser: {
         TokenBuilder: () => new MermiadTokenBuilder(),
+        ValueConverter: () => new MermaidValueConverter(),
     },
     validation: {
         PieChartValidator: () => new PieChartValidator(),
