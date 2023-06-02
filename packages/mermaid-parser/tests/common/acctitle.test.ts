@@ -68,23 +68,18 @@ describe('accTitle', () => {
             expect(value.accTitle).toBe('sample accessibility + title test');
         });
 
-        it.todo(
-            'should handle accTitle with single line accDescr',
-            async () => {
-                const string_ = `pie accTitle: sample description + accDescr: test`;
-                const { parseResult: result } = await parse(string_);
-                expect(result.parserErrors).toHaveLength(0);
-                expect(result.lexerErrors).toHaveLength(0);
+        it('should handle accTitle with single line accDescr', async () => {
+            const string_ = `pie accTitle: sample description + accDescr: test`;
+            const { parseResult: result } = await parse(string_);
+            expect(result.parserErrors).toHaveLength(0);
+            expect(result.lexerErrors).toHaveLength(0);
 
-                const value = result.value;
-                expect(value.accDescr).toBeUndefined();
-                expect(value.accTitle).toBe(
-                    'sample description + accDescr: test',
-                );
-            },
-        );
+            const value = result.value;
+            expect(value.accDescr).toBeUndefined();
+            expect(value.accTitle).toBe('sample description + accDescr: test');
+        });
 
-        it.todo('should handle accTitle with multi line accDescr', async () => {
+        it('should handle accTitle with multi line accDescr', async () => {
             const string_ = `pie accTitle: sample description + accDescr {test}`;
             const { parseResult: result } = await parse(string_);
             expect(result.parserErrors).toHaveLength(0);

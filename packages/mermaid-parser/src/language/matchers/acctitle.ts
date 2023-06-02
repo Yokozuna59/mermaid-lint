@@ -4,7 +4,7 @@ import { CustomPatternMatcherFunc } from 'chevrotain';
 /**
  * Matches a single accessible title
  */
-const accessibilityTitleRegex = /accTitle[\t ]*:[\t ]*([^\n\r]*)/;
+const accessibilityTitleRegex = /accTitle[\t ]*:[\t ]*([^\n\r]*)/y;
 export const matchAccessibilityTitle: CustomPatternMatcherFunc = (
     text: string,
     startOffset: number,
