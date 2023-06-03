@@ -5,8 +5,7 @@ entry PieChart:
     NEWLINE*
     PIE (showData?=SHOWDATA)?
     (NEWLINE* TITLE_AND_ACCESSIBILITIES)?
-    (NEWLINE+ sections+=Section)*
-    NEWLINE*
+    NEWLINE* (sections+=Section NEWLINE+)*
 ;
 
 Section:

@@ -12,9 +12,10 @@ import {
 import {
     MermaidGeneratedModule,
     MermaidGeneratedSharedModule,
+    MermaidLexer,
     MermaidValueConverter,
     MermiadTokenBuilder,
-} from './index';
+} from '.';
 import { PieChartValidator, registerValidationChecks } from './validators';
 
 /**
@@ -44,6 +45,7 @@ export const MermaidModule: Module<
     PartialLangiumServices & MermaidAddedServices
 > = {
     parser: {
+        Lexer: (services) => new MermaidLexer(services),
         TokenBuilder: () => new MermiadTokenBuilder(),
         ValueConverter: () => new MermaidValueConverter(),
     },
