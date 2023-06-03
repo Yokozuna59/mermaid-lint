@@ -1,12 +1,14 @@
+/* eslint-disable security/detect-non-literal-regexp */
+
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { CstNode, DefaultValueConverter, ValueType } from 'langium';
 import { AbstractRule } from 'langium/lib/grammar/generated/ast';
 
-const accessibilityDescrRegex =
-    // eslint-disable-next-line regexp/strict, regexp/no-super-linear-backtracking
-    /accDescr(?:[\t ]*:[\t ]*([^\n\r]*)|\s*{([^}]*)})/;
-const accessibilityTitleRegex = /accTitle[\t ]*:[\t ]*([^\n\r]*)/;
-const titleRegex = /title(?:[\t ]+([^\n\r]*)|$)/;
+import {
+    accessibilityDescrRegex,
+    accessibilityTitleRegex,
+    titleRegex,
+} from './matchers';
 
 export class MermaidValueConverter extends DefaultValueConverter {
     override runConverter(
@@ -16,16 +18,17 @@ export class MermaidValueConverter extends DefaultValueConverter {
     ): ValueType {
         let regex: RegExp | undefined;
         switch (rule.name) {
+            // common
             case 'ACC_DESCR': {
-                regex = accessibilityDescrRegex;
+                regex = new RegExp(accessibilityDescrRegex.source);
                 break;
             }
             case 'ACC_TITLE': {
-                regex = accessibilityTitleRegex;
+                regex = new RegExp(accessibilityTitleRegex.source);
                 break;
             }
             case 'TITLE': {
-                regex = titleRegex;
+                regex = new RegExp(titleRegex.source);
                 break;
             }
         }
@@ -47,3 +50,4 @@ export class MermaidValueConverter extends DefaultValueConverter {
     }
 }
 /* eslint-enable @typescript-eslint/no-non-null-assertion */
+/* eslint-enable security/detect-non-literal-regexp */
