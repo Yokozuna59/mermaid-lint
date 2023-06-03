@@ -6,7 +6,7 @@ import { CustomPatternMatcherFunc } from 'chevrotain';
  */
 const accessibilityDescrRegex =
     // eslint-disable-next-line regexp/strict, regexp/no-super-linear-backtracking
-    /accDescr(?:[\t ]*:[\t ]*([^\n\r]*)|\s*{([^}]*)})/;
+    /accDescr(?:[\t ]*:[\t ]*([^\n\r]*)|\s*{([^}]*)})/y;
 export const matchAccessibilityDescr: CustomPatternMatcherFunc = (
     text: string,
     startOffset: number,
