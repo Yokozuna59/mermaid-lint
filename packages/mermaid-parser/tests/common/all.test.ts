@@ -7,7 +7,7 @@ describe('all', () => {
     const { parse } = createTestServices<Mermaid>();
 
     describe('title', () => {
-        it.todo('title then accTitle then single line accDescr', async () => {
+        it('title then accTitle then single line accDescr', async () => {
             const string_ = `pie
             title sample
             accTitle: test
@@ -22,7 +22,7 @@ describe('all', () => {
             expect(value.accTitle).toBe('test');
         });
 
-        it.todo('title then accTitle then multi line accDescr', async () => {
+        it('title then accTitle then multi line accDescr', async () => {
             const string_ = `pie
             title sample
             accTitle: test
@@ -39,7 +39,7 @@ describe('all', () => {
             expect(value.accTitle).toBe('test');
         });
 
-        it.todo('title then single line accDescr then accTitle', async () => {
+        it('title then single line accDescr then accTitle', async () => {
             const string_ = `pie
             title sample
             accDescr: wow
@@ -54,7 +54,7 @@ describe('all', () => {
             expect(value.accTitle).toBe('test');
         });
 
-        it.todo('title then multi line accDescr then accTitle', async () => {
+        it('title then multi line accDescr then accTitle', async () => {
             const string_ = `pie
             title sample
             accDescr {
@@ -73,7 +73,7 @@ describe('all', () => {
     });
 
     describe('accTitle', () => {
-        it.todo('accTitle then title then single line accDescr', async () => {
+        it('accTitle then title then single line accDescr', async () => {
             const string_ = `pie
             accTitle: test
             title sample
@@ -88,7 +88,7 @@ describe('all', () => {
             expect(value.accTitle).toBe('test');
         });
 
-        it.todo('accTitle then title then multi line accDescr', async () => {
+        it('accTitle then title then multi line accDescr', async () => {
             const string_ = `pie
             accTitle: test
             title sample
@@ -105,7 +105,7 @@ describe('all', () => {
             expect(value.accTitle).toBe('test');
         });
 
-        it.todo('accTitle then single line accDescr then title', async () => {
+        it('accTitle then single line accDescr then title', async () => {
             const string_ = `pie
             accTitle: test
             accDescr: wow
@@ -120,7 +120,7 @@ describe('all', () => {
             expect(value.accTitle).toBe('test');
         });
 
-        it.todo('accTitle then multi line accDescr then title', async () => {
+        it('accTitle then multi line accDescr then title', async () => {
             const string_ = `pie
             accTitle: test
             accDescr {
@@ -140,7 +140,7 @@ describe('all', () => {
 
     describe('accDescr', () => {
         describe('single line', () => {
-            it.todo('accDescr then accTitle then title', async () => {
+            it('accDescr then accTitle then title', async () => {
                 const string_ = `pie
                 accDescr: wow
                 accTitle: test
@@ -155,7 +155,7 @@ describe('all', () => {
                 expect(value.accTitle).toBe('test');
             });
 
-            it.todo('accDescr then title then accTitle', async () => {
+            it('accDescr then title then accTitle', async () => {
                 const string_ = `pie
                 accTitle: test
                 accDescr: wow
@@ -172,7 +172,7 @@ describe('all', () => {
         });
 
         describe('multi line', () => {
-            it.todo('accDescr then accTitle then title', async () => {
+            it('accDescr then accTitle then title', async () => {
                 const string_ = `pie
                 accDescr {
                     wow
@@ -189,7 +189,7 @@ describe('all', () => {
                 expect(value.accTitle).toBe('test');
             });
 
-            it.todo('accDescr then title then accTitle', async () => {
+            it('accDescr then title then accTitle', async () => {
                 const string_ = `pie
                 accDescr {
                     wow

@@ -214,67 +214,55 @@ describe('accDescr', () => {
         });
 
         describe('after', () => {
-            it.todo(
-                'should handle single line after single line accDescr',
-                async () => {
-                    const string_ = `pie accDescr: sample accessibility
+            it('should handle single line after single line accDescr', async () => {
+                const string_ = `pie accDescr: sample accessibility
                     accDescr: test accessibility`;
-                    const { parseResult: result } = await parse(string_);
-                    expect(result.parserErrors).toHaveLength(0);
-                    expect(result.lexerErrors).toHaveLength(0);
+                const { parseResult: result } = await parse(string_);
+                expect(result.parserErrors).toHaveLength(0);
+                expect(result.lexerErrors).toHaveLength(0);
 
-                    const value = result.value;
-                    expect(value.accDescr).toBe('test accessibility');
-                },
-            );
+                const value = result.value;
+                expect(value.accDescr).toBe('test accessibility');
+            });
 
-            it.todo(
-                'should handle single line after multi line accDescr',
-                async () => {
-                    const string_ = `pie accDescr {
+            it('should handle single line after multi line accDescr', async () => {
+                const string_ = `pie accDescr {
                         sample accessibility
                     }
                     accDescr:`;
-                    const { parseResult: result } = await parse(string_);
-                    expect(result.parserErrors).toHaveLength(0);
-                    expect(result.lexerErrors).toHaveLength(0);
+                const { parseResult: result } = await parse(string_);
+                expect(result.parserErrors).toHaveLength(0);
+                expect(result.lexerErrors).toHaveLength(0);
 
-                    const value = result.value;
-                    expect(value.accDescr).toBeUndefined();
-                },
-            );
+                const value = result.value;
+                expect(value.accDescr).toBeUndefined();
+            });
 
-            it.todo(
-                'should handle multi line after single line accDescr',
-                async () => {
-                    const string_ = `pie accDescr: sample accessibility
+            it('should handle multi line after single line accDescr', async () => {
+                const string_ = `pie accDescr: sample accessibility
                     accDescr {}`;
-                    const { parseResult: result } = await parse(string_);
-                    expect(result.parserErrors).toHaveLength(0);
-                    expect(result.lexerErrors).toHaveLength(0);
+                const { parseResult: result } = await parse(string_);
+                expect(result.parserErrors).toHaveLength(0);
+                expect(result.lexerErrors).toHaveLength(0);
 
-                    const value = result.value;
-                    expect(value.accDescr).toBeUndefined();
-                },
-            );
+                const value = result.value;
+                expect(value.accDescr).toBeUndefined();
+            });
 
-            it.todo(
-                'should handle multi line after multi line accDescr',
-                async () => {
-                    const string_ = `pie accDescr {
+            it('should handle multi line after multi line accDescr', async () => {
+                const string_ = `pie accDescr {
                         sample accessibility
                     }
                     accDescr {
 
                     }`;
-                    const { parseResult: result } = await parse(string_);
-                    expect(result.parserErrors).toHaveLength(0);
-                    expect(result.lexerErrors).toHaveLength(0);
+                const { parseResult: result } = await parse(string_);
+                expect(result.parserErrors).toHaveLength(0);
+                expect(result.lexerErrors).toHaveLength(0);
 
-                    const value = result.value;
-                    expect(value.accDescr).toBeUndefined();
-                },
-            );
+                const value = result.value;
+                expect(value.accDescr).toBeUndefined();
+            });
         });
     });
 });

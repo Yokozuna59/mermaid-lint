@@ -105,47 +105,38 @@ describe('accTitle', () => {
         });
 
         describe('after', () => {
-            it.todo(
-                'should handle regular accTitle after empty accTitle',
-                async () => {
-                    const string_ = `pie accTitle:
+            it('should handle regular accTitle after empty accTitle', async () => {
+                const string_ = `pie accTitle:
                     accTitle: sample accessibility`;
-                    const { parseResult: result } = await parse(string_);
-                    expect(result.parserErrors).toHaveLength(0);
-                    expect(result.lexerErrors).toHaveLength(0);
+                const { parseResult: result } = await parse(string_);
+                expect(result.parserErrors).toHaveLength(0);
+                expect(result.lexerErrors).toHaveLength(0);
 
-                    const value = result.value;
-                    expect(value.accTitle).toBe('sample accessibility');
-                },
-            );
+                const value = result.value;
+                expect(value.accTitle).toBe('sample accessibility');
+            });
 
-            it.todo(
-                'should handle empty accTitle after regular accTitle',
-                async () => {
-                    const string_ = `pie accTitle: sample accessibility
+            it('should handle empty accTitle after regular accTitle', async () => {
+                const string_ = `pie accTitle: sample accessibility
                     accTitle:`;
-                    const { parseResult: result } = await parse(string_);
-                    expect(result.parserErrors).toHaveLength(0);
-                    expect(result.lexerErrors).toHaveLength(0);
+                const { parseResult: result } = await parse(string_);
+                expect(result.parserErrors).toHaveLength(0);
+                expect(result.lexerErrors).toHaveLength(0);
 
-                    const value = result.value;
-                    expect(value.accTitle).toBeUndefined();
-                },
-            );
+                const value = result.value;
+                expect(value.accTitle).toBeUndefined();
+            });
 
-            it.todo(
-                'should handle regular accTitle after regular accTitle',
-                async () => {
-                    const string_ = `pie accTitle: test accessibility
+            it('should handle regular accTitle after regular accTitle', async () => {
+                const string_ = `pie accTitle: test accessibility
                     accTitle: sample accessibility`;
-                    const { parseResult: result } = await parse(string_);
-                    expect(result.parserErrors).toHaveLength(0);
-                    expect(result.lexerErrors).toHaveLength(0);
+                const { parseResult: result } = await parse(string_);
+                expect(result.parserErrors).toHaveLength(0);
+                expect(result.lexerErrors).toHaveLength(0);
 
-                    const value = result.value;
-                    expect(value.accTitle).toBe('sample accessibility');
-                },
-            );
+                const value = result.value;
+                expect(value.accTitle).toBe('sample accessibility');
+            });
         });
     });
 });
