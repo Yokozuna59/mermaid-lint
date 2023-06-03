@@ -7,7 +7,7 @@ describe('accTitle', () => {
     const { parse } = createTestServices<Mermaid>();
 
     describe('normal', () => {
-        it.todo.each([
+        it.each([
             // without whitespaces
             `pie accTitle:`,
 
@@ -32,7 +32,7 @@ describe('accTitle', () => {
             expect(value.accTitle).toBeUndefined();
         });
 
-        it.todo.each([
+        it.each([
             // without whitespaces
             `pie accTitle: sample accessibility`,
 
@@ -57,7 +57,7 @@ describe('accTitle', () => {
             expect(value.accTitle).toBe('sample accessibility');
         });
 
-        it.todo('should handle accTitle with title', async () => {
+        it('should handle accTitle with title', async () => {
             const string_ = `pie accTitle: sample accessibility + title test`;
             const { parseResult: result } = await parse(string_);
             expect(result.parserErrors).toHaveLength(0);
@@ -98,7 +98,7 @@ describe('accTitle', () => {
 
     describe('duplicate', () => {
         describe('inside', () => {
-            it.todo('should handle accTitle inside accTitle', async () => {
+            it('should handle accTitle inside accTitle', async () => {
                 const string_ = `pie accTitle: accTitle: test`;
                 const { parseResult: result } = await parse(string_);
                 expect(result.parserErrors).toHaveLength(0);
@@ -114,7 +114,7 @@ describe('accTitle', () => {
                 'should handle regular accTitle after empty accTitle',
                 async () => {
                     const string_ = `pie accTitle:
-                accTitle: sample accessibility`;
+                    accTitle: sample accessibility`;
                     const { parseResult: result } = await parse(string_);
                     expect(result.parserErrors).toHaveLength(0);
                     expect(result.lexerErrors).toHaveLength(0);
@@ -128,7 +128,7 @@ describe('accTitle', () => {
                 'should handle empty accTitle after regular accTitle',
                 async () => {
                     const string_ = `pie accTitle: sample accessibility
-                accTitle:`;
+                    accTitle:`;
                     const { parseResult: result } = await parse(string_);
                     expect(result.parserErrors).toHaveLength(0);
                     expect(result.lexerErrors).toHaveLength(0);
@@ -142,7 +142,7 @@ describe('accTitle', () => {
                 'should handle regular accTitle after regular accTitle',
                 async () => {
                     const string_ = `pie accTitle: test accessibility
-                accTitle: sample accessibility`;
+                    accTitle: sample accessibility`;
                     const { parseResult: result } = await parse(string_);
                     expect(result.parserErrors).toHaveLength(0);
                     expect(result.lexerErrors).toHaveLength(0);

@@ -60,7 +60,7 @@ describe('pie chart', () => {
     });
 
     // title
-    it.todo.each([
+    it.each([
         // without whitespaces
         `pie title sample title`,
 
@@ -90,7 +90,7 @@ describe('pie chart', () => {
     );
 
     // pie + \n + title
-    it.todo.each([
+    it.each([
         // without newlines
         `pie
         title sample title`,
@@ -125,7 +125,7 @@ describe('pie chart', () => {
     );
 
     // showData + title
-    it.todo.each([
+    it.each([
         // without newlines
         `pie showData title sample title`,
 
@@ -147,7 +147,7 @@ describe('pie chart', () => {
     );
 
     // showData + \n + title
-    it.todo.each([
+    it.each([
         // without newlines
         `pie showData
         title sample title`,
@@ -246,7 +246,7 @@ describe('pie chart', () => {
                 expect(section1?.value).toBe(50);
             });
 
-            it.todo('should handle sections with title', async () => {
+            it('should handle sections with title', async () => {
                 const string_ = `pie title sample wow
                 "GitHub": 100
                 "GitLab": 50`;
@@ -267,7 +267,7 @@ describe('pie chart', () => {
                 expect(section1?.value).toBe(50);
             });
 
-            it.todo('should handle sections with accTitle', async () => {
+            it('should handle sections with accTitle', async () => {
                 const string_ = `pie accTitle: sample wow
                 "GitHub": 100
                 "GitLab": 50`;
@@ -288,55 +288,49 @@ describe('pie chart', () => {
                 expect(section1?.value).toBe(50);
             });
 
-            it.todo(
-                'should handle sections with single line accDescr',
-                async () => {
-                    const string_ = `pie accDescr: sample wow
-                    "GitHub": 100
-                    "GitLab": 50`;
-                    const { parseResult: result } = await parse(string_);
-                    expect(result.parserErrors).toHaveLength(0);
-                    expect(result.lexerErrors).toHaveLength(0);
+            it('should handle sections with single line accDescr', async () => {
+                const string_ = `pie accDescr: sample wow
+                "GitHub": 100
+                "GitLab": 50`;
+                const { parseResult: result } = await parse(string_);
+                expect(result.parserErrors).toHaveLength(0);
+                expect(result.lexerErrors).toHaveLength(0);
 
-                    const value = result.value;
-                    expect(value.$type).toBe(PieChart);
-                    expect(value.accDescr).toBe('sample wow');
+                const value = result.value;
+                expect(value.$type).toBe(PieChart);
+                expect(value.accDescr).toBe('sample wow');
 
-                    const section0 = value.sections[0];
-                    expect(section0?.label).toBe('GitHub');
-                    expect(section0?.value).toBe(100);
+                const section0 = value.sections[0];
+                expect(section0?.label).toBe('GitHub');
+                expect(section0?.value).toBe(100);
 
-                    const section1 = value.sections[1];
-                    expect(section1?.label).toBe('GitLab');
-                    expect(section1?.value).toBe(50);
-                },
-            );
+                const section1 = value.sections[1];
+                expect(section1?.label).toBe('GitLab');
+                expect(section1?.value).toBe(50);
+            });
 
-            it.todo(
-                'should handle sections with multi line accDescr',
-                async () => {
-                    const string_ = `pie accDescr {
-                        sample wow
-                    }
-                    "GitHub": 100
-                    "GitLab": 50`;
-                    const { parseResult: result } = await parse(string_);
-                    expect(result.parserErrors).toHaveLength(0);
-                    expect(result.lexerErrors).toHaveLength(0);
+            it('should handle sections with multi line accDescr', async () => {
+                const string_ = `pie accDescr {
+                    sample wow
+                }
+                "GitHub": 100
+                "GitLab": 50`;
+                const { parseResult: result } = await parse(string_);
+                expect(result.parserErrors).toHaveLength(0);
+                expect(result.lexerErrors).toHaveLength(0);
 
-                    const value = result.value;
-                    expect(value.$type).toBe(PieChart);
-                    expect(value.accDescr).toBe('sample wow');
+                const value = result.value;
+                expect(value.$type).toBe(PieChart);
+                expect(value.accDescr).toBe('sample wow');
 
-                    const section0 = value.sections[0];
-                    expect(section0?.label).toBe('GitHub');
-                    expect(section0?.value).toBe(100);
+                const section0 = value.sections[0];
+                expect(section0?.label).toBe('GitHub');
+                expect(section0?.value).toBe(100);
 
-                    const section1 = value.sections[1];
-                    expect(section1?.label).toBe('GitLab');
-                    expect(section1?.value).toBe(50);
-                },
-            );
+                const section1 = value.sections[1];
+                expect(section1?.label).toBe('GitLab');
+                expect(section1?.value).toBe(50);
+            });
         });
 
         describe('duplicate', () => {
