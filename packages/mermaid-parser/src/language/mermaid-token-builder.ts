@@ -12,6 +12,7 @@ export class MermiadTokenBuilder extends DefaultTokenBuilder {
     override buildTerminalToken(terminal: TerminalRule): TokenType {
         const tokenType = super.buildTerminalToken(terminal);
         switch (tokenType.name) {
+            // common
             case 'ACC_DESCR': {
                 tokenType.LINE_BREAKS = true;
                 tokenType.PATTERN = matchAccessibilityDescr;
