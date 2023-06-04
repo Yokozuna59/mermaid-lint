@@ -4,7 +4,7 @@ import { CustomPatternMatcherFunc } from 'chevrotain';
 /**
  * Matches a single title
  */
-const titleRegex = /title(?:[\t ]+([^\n\r]*)|$)/;
+const titleRegex = /title(?:[\t ]+([^\n\r]*)|$)/my;
 export const matchTitle: CustomPatternMatcherFunc = (
     text: string,
     startOffset: number,
