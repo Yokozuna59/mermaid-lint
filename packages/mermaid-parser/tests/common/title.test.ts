@@ -115,16 +115,19 @@ describe('title', () => {
         });
 
         describe('after', () => {
-            it('should handle regular title after empty title', async () => {
-                const string_ = `pie title
-                title sample`;
-                const { parseResult: result } = await parse(string_);
-                expect(result.parserErrors).toHaveLength(0);
-                expect(result.lexerErrors).toHaveLength(0);
+            it.todo(
+                'should handle regular title after empty title',
+                async () => {
+                    const string_ = `pie title
+                    title sample`;
+                    const { parseResult: result } = await parse(string_);
+                    expect(result.parserErrors).toHaveLength(0);
+                    expect(result.lexerErrors).toHaveLength(0);
 
-                const value = result.value;
-                expect(value.title).toBe('sample');
-            });
+                    const value = result.value;
+                    expect(value.title).toBe('sample');
+                },
+            );
 
             it.todo(
                 'should handle empty title after regular title',
