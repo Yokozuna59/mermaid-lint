@@ -86,16 +86,16 @@ export const MermaidGrammar = (): Grammar => loadedMermaidGrammar ?? (loadedMerm
             "cardinality": "?"
           },
           {
+            "$type": "RuleCall",
+            "rule": {
+              "$ref": "#/rules@6"
+            },
+            "arguments": [],
+            "cardinality": "*"
+          },
+          {
             "$type": "Group",
             "elements": [
-              {
-                "$type": "RuleCall",
-                "rule": {
-                  "$ref": "#/rules@6"
-                },
-                "arguments": [],
-                "cardinality": "+"
-              },
               {
                 "$type": "Assignment",
                 "feature": "sections",
@@ -107,16 +107,16 @@ export const MermaidGrammar = (): Grammar => loadedMermaidGrammar ?? (loadedMerm
                   },
                   "arguments": []
                 }
+              },
+              {
+                "$type": "RuleCall",
+                "rule": {
+                  "$ref": "#/rules@6"
+                },
+                "arguments": [],
+                "cardinality": "+"
               }
             ],
-            "cardinality": "*"
-          },
-          {
-            "$type": "RuleCall",
-            "rule": {
-              "$ref": "#/rules@6"
-            },
-            "arguments": [],
             "cardinality": "*"
           }
         ]
@@ -195,43 +195,56 @@ export const MermaidGrammar = (): Grammar => loadedMermaidGrammar ?? (loadedMerm
       "name": "TITLE_AND_ACCESSIBILITIES",
       "fragment": true,
       "definition": {
-        "$type": "Alternatives",
+        "$type": "Group",
         "elements": [
           {
-            "$type": "Assignment",
-            "feature": "accDescr",
-            "operator": "=",
-            "terminal": {
-              "$type": "RuleCall",
-              "rule": {
-                "$ref": "#/rules@12"
+            "$type": "Alternatives",
+            "elements": [
+              {
+                "$type": "Assignment",
+                "feature": "accDescr",
+                "operator": "=",
+                "terminal": {
+                  "$type": "RuleCall",
+                  "rule": {
+                    "$ref": "#/rules@12"
+                  },
+                  "arguments": []
+                }
               },
-              "arguments": []
-            }
+              {
+                "$type": "Assignment",
+                "feature": "accTitle",
+                "operator": "=",
+                "terminal": {
+                  "$type": "RuleCall",
+                  "rule": {
+                    "$ref": "#/rules@13"
+                  },
+                  "arguments": []
+                }
+              },
+              {
+                "$type": "Assignment",
+                "feature": "title",
+                "operator": "=",
+                "terminal": {
+                  "$type": "RuleCall",
+                  "rule": {
+                    "$ref": "#/rules@14"
+                  },
+                  "arguments": []
+                }
+              }
+            ]
           },
           {
-            "$type": "Assignment",
-            "feature": "accTitle",
-            "operator": "=",
-            "terminal": {
-              "$type": "RuleCall",
-              "rule": {
-                "$ref": "#/rules@13"
-              },
-              "arguments": []
-            }
-          },
-          {
-            "$type": "Assignment",
-            "feature": "title",
-            "operator": "=",
-            "terminal": {
-              "$type": "RuleCall",
-              "rule": {
-                "$ref": "#/rules@14"
-              },
-              "arguments": []
-            }
+            "$type": "RuleCall",
+            "rule": {
+              "$ref": "#/rules@6"
+            },
+            "arguments": [],
+            "cardinality": "*"
           }
         ],
         "cardinality": "+"
